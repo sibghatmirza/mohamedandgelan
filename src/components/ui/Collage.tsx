@@ -21,7 +21,7 @@ export function Polaroid({
         style={{ aspectRatio: '1 / 1', background: src ? `center/cover url(${src})` : 'linear-gradient(135deg,#EAE2D8,#A99F95)' }}
       />
       {caption && (
-        <p className="text-center mt-2" style={{ fontFamily: "'Pinyon Script', cursive", fontSize: '1.1rem', color: '#5C111E' }}>
+        <p className="text-center mt-2" style={{ fontFamily: 'var(--font-heading)', fontSize: '1.1rem', color: '#5C111E' }}>
           {caption}
         </p>
       )}

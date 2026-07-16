@@ -5,7 +5,8 @@ import Link from 'next/link';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useForm } from 'react-hook-form';
 import { useLang } from '@/context/LanguageContext';
-import { Monogram, WatercolorDivider, TornEdge } from '@/components/ui/WatercolorIllustrations';
+import { Monogram, WatercolorDivider, TornEdge, WatercolorWash, FloralBackdrop } from '@/components/ui/WatercolorIllustrations';
+import MusicPlayer from '@/components/ui/MusicPlayer';
 
 type FormValues = {
   name: string;
@@ -58,14 +59,14 @@ export default function NileCruisePage() {
   };
 
   const labelCls = 'block text-xs tracking-widest mb-2';
-  const labelStyle = { color: '#D8B36A', fontFamily: "'Cormorant Garamond', serif" };
+  const labelStyle = { color: '#D8B36A', fontFamily: 'var(--font-body)' };
 
   return (
     <main dir={t.dir} style={{ background: '#FAF7F2', minHeight: '100vh' }}>
       {/* ── Top bar: monogram + language toggle ── */}
       <div className="flex items-center justify-between px-6 py-4 max-w-5xl mx-auto">
         <Link href="/"><Monogram size={44} /></Link>
-        <div className="flex items-center gap-1 text-xs tracking-widest" style={{ fontFamily: "'Cormorant Garamond', serif" }}>
+        <div className="flex items-center gap-1 text-xs tracking-widest" style={{ fontFamily: 'var(--font-body)' }}>
           <button onClick={() => setLang('en')}
             className={`px-2 py-1 ${lang === 'en' ? 'text-[#D8B36A] border-b border-[#D8B36A]' : 'text-[#5C111E]'}`}>
             EN
@@ -78,61 +79,63 @@ export default function NileCruisePage() {
         </div>
       </div>
 
-      {/* ── Burgundy hero card ── */}
-      <section className="px-4 pb-6">
-        <motion.div
-          initial={{ opacity: 0, y: 24 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.9 }}
-          className="max-w-3xl mx-auto text-center relative"
-          style={{
-            background: 'linear-gradient(160deg, #4a0d18, #3a0b14)',
-            border: '10px solid #4a0d18',
-            boxShadow: '0 26px 60px rgba(92,17,30,0.35)',
-          }}
-        >
-          <div className="px-8 py-14 sm:py-16" style={{ border: '1px solid rgba(242,237,228,0.35)' }}>
-            <p className="font-script" style={{ fontSize: 'clamp(3rem,12vw,4.2rem)', color: '#FAF7F2', lineHeight: 1 }}>
-              {cr.script}
-            </p>
-            <h1 className="mt-4 uppercase" style={{
-              fontFamily: "'Cinzel', serif",
-              fontSize: 'clamp(1.05rem,4vw,1.7rem)',
-              letterSpacing: '0.12em',
-              color: '#F2EDE4',
-            }}>
-              {cr.title}
-            </h1>
-            <div className="flex justify-center mt-8">
-              <Monogram size={92} color="ivory" />
-            </div>
-          </div>
-        </motion.div>
-      </section>
+      {/* ── Details (light, main-site theme) ── */}
+      <section
+        className="relative py-14 px-6 overflow-x-clip"
+        style={{ background: 'linear-gradient(160deg, #FAF7F2 0%, #EAE2D8 100%)' }}
+      >
+        <WatercolorWash />
+        <FloralBackdrop opacity={0.08} />
 
-      {/* ── Details ── */}
-      <section className="px-6 py-12 text-center">
-        <motion.div
-          initial={{ opacity: 0, y: 24 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8 }}
-          className="max-w-2xl mx-auto"
-        >
-          <h2 className="uppercase" style={{ fontFamily: "'Cinzel', serif", fontSize: '1.5rem', color: '#5C111E', letterSpacing: '0.1em' }}>
-            {cr.timeLabel}
-          </h2>
-          <div className="h-px w-10 mx-auto my-3" style={{ background: '#D8B36A' }} />
-          <p className="font-body" style={{ fontSize: '1.25rem', color: '#6b5e56' }}>{cr.timeValue}</p>
+        <div className="max-w-3xl mx-auto text-center relative z-10">
+          {/* Header — matches the main-page section headers */}
+          <motion.div
+            className="mb-10"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+          >
+            <p className="section-subtitle mb-4">{cr.heroSubtitle}</p>
+            <h1 className="section-title">{cr.heroTitle}</h1>
+            <WatercolorDivider />
+          </motion.div>
 
-          <h2 className="uppercase mt-12" style={{ fontFamily: "'Cinzel', serif", fontSize: '1.5rem', color: '#5C111E', letterSpacing: '0.1em' }}>
-            {cr.boardingLabel}
-          </h2>
-          <div className="h-px w-10 mx-auto my-3" style={{ background: '#D8B36A' }} />
-          <p className="font-body" style={{ fontSize: '1.15rem', color: '#5C111E', lineHeight: 1.7 }}>{cr.boardingValue}</p>
+          {/* Boarding time */}
+          <motion.div
+            className="flex flex-col items-center gap-2 mb-10"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+          >
+            <p className="caps-label" style={{ fontSize: '0.75rem' }}>{cr.boardingTimeLabel}</p>
+            <div className="h-px w-8" style={{ background: '#D8B36A' }} />
+            <p className="font-body" style={{ fontSize: '1.4rem', color: '#5C111E' }}>{cr.boardingTime}</p>
+          </motion.div>
+
+          {/* Boarding location */}
+          <motion.div
+            className="flex flex-col items-center gap-2 mb-6"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+          >
+            <p className="caps-label" style={{ fontSize: '0.75rem' }}>{cr.boardingLabel}</p>
+            <div className="h-px w-8" style={{ background: '#D8B36A' }} />
+            <p className="font-body" style={{ fontSize: '1.05rem', color: '#6b5e56', lineHeight: 1.6, maxWidth: 460 }}>{cr.boardingValue}</p>
+          </motion.div>
 
           {/* map */}
-          <div className="overflow-hidden mx-auto mt-10" style={{ maxWidth: 640, border: '1px solid rgba(216,179,106,0.5)' }}>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+            className="overflow-hidden mx-auto mt-8"
+            style={{ maxWidth: 640, border: '1px solid rgba(216,179,106,0.5)' }}
+          >
             <iframe
               src={MAP_SRC}
               width="100%"
@@ -143,16 +146,16 @@ export default function NileCruisePage() {
               referrerPolicy="strict-origin-when-cross-origin"
               title="Boarding Location"
             />
-          </div>
-        </motion.div>
+          </motion.div>
+        </div>
       </section>
 
-      {/* ── RSVP ── */}
+      {/* ── RSVP (same as main site) ── */}
       <section
-        className="relative py-20 px-6 overflow-x-clip"
+        className="relative py-14 px-6 overflow-x-clip"
         style={{ background: 'linear-gradient(160deg, #5C111E 0%, #3a0b14 50%, #5C111E 100%)' }}
       >
-        <TornEdge position="top" color="#5C111E" />
+        <TornEdge position="top" color="#EAE2D8" />
         <div className="max-w-xl mx-auto relative z-10">
           <motion.div
             className="text-center mb-10"
@@ -171,15 +174,15 @@ export default function NileCruisePage() {
             {status === 'success' && (
               <motion.div key="success" initial={{ opacity: 0, scale: 0.8 }} animate={{ opacity: 1, scale: 1 }}
                 className="text-center py-14 flex flex-col items-center gap-5">
-                <h3 style={{ fontFamily: "'Pinyon Script', cursive", fontSize: '2.5rem', color: '#FAF7F2' }}>{t.rsvp.thankYou}</h3>
-                <p style={{ fontFamily: "'Cormorant Garamond', serif", color: '#D8B36A', fontSize: '1.1rem' }}>{t.rsvp.success}</p>
+                <h3 style={{ fontFamily: 'var(--font-heading)', fontSize: '3rem', color: '#FAF7F2' }}>{t.rsvp.thankYou}</h3>
+                <p style={{ fontFamily: 'var(--font-body)', color: '#D8B36A', fontSize: '1.1rem' }}>{t.rsvp.success}</p>
               </motion.div>
             )}
             {status === 'declined' && (
               <motion.div key="declined" initial={{ opacity: 0, scale: 0.8 }} animate={{ opacity: 1, scale: 1 }}
                 className="text-center py-14 flex flex-col items-center gap-5">
-                <h3 style={{ fontFamily: "'Pinyon Script', cursive", fontSize: '2.5rem', color: '#FAF7F2' }}>{t.rsvp.understand}</h3>
-                <p style={{ fontFamily: "'Cormorant Garamond', serif", color: '#D8B36A', fontSize: '1.1rem' }}>{t.rsvp.successDecline}</p>
+                <h3 style={{ fontFamily: 'var(--font-heading)', fontSize: '3rem', color: '#FAF7F2' }}>{t.rsvp.understand}</h3>
+                <p style={{ fontFamily: 'var(--font-body)', color: '#D8B36A', fontSize: '1.1rem' }}>{t.rsvp.successDecline}</p>
               </motion.div>
             )}
             {(status === 'idle' || status === 'submitting' || status === 'error') && (
@@ -230,7 +233,7 @@ export default function NileCruisePage() {
                   </div>
                 </div>
                 {status === 'error' && (
-                  <p className="text-center" style={{ color: '#e07070', fontFamily: "'Cormorant Garamond', serif" }}>
+                  <p className="text-center" style={{ color: '#e07070', fontFamily: 'var(--font-body)' }}>
                     Something went wrong. Please try again.
                   </p>
                 )}
@@ -243,11 +246,13 @@ export default function NileCruisePage() {
       {/* ── Mini footer ── */}
       <footer className="py-12 text-center flex flex-col items-center gap-3" style={{ background: '#FAF7F2' }}>
         <Monogram size={56} />
-        <p className="font-script" style={{ fontSize: '1.8rem', color: '#5C111E' }}>{t.hero.coupleNames}</p>
+        <p className="font-script" style={{ fontSize: '2.2rem', color: '#5C111E' }}>{t.hero.coupleNames}</p>
         <Link href="/" className="caps-label mt-2" style={{ fontSize: '0.65rem', color: '#A99F95' }}>
           {cr.backHome}
         </Link>
       </footer>
+
+      <MusicPlayer src="/music/nile.mp3" />
     </main>
   );
 }

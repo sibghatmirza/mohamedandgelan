@@ -10,7 +10,7 @@ export default function FooterSection() {
 
   return (
     <footer
-      className="relative py-20 px-6 text-center overflow-x-clip"
+      className="relative py-14 px-6 text-center overflow-x-clip"
       style={{ background: '#FAF7F2' }}
     >
       <TornEdge position="top" color="#FAF7F2" />
@@ -24,20 +24,17 @@ export default function FooterSection() {
       >
 
         <Monogram size={72} />
-        <h2 style={{ fontFamily: "'Pinyon Script', cursive", fontSize: '2.5rem', color: '#5C111E' }}>
+        <h2 style={{ fontFamily: 'var(--font-heading)', fontSize: '2.5rem', color: '#5C111E' }}>
           {t.footer.names}
         </h2>
         <WatercolorDivider />
         <p className="section-subtitle">{t.footer.date}</p>
-        <p style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: '0.9rem', color: '#A99F95', marginTop: '2rem' }}>
-          {t.footer.madeWith} ♡
-        </p>
 
         {/* Nav links */}
-        <div className="flex flex-wrap justify-center gap-6 mt-4">
+        <div className="flex flex-wrap justify-center gap-6 mt-6">
           {[
             { href: '#home',    label: t.nav.home },
-            { href: '#story',   label: t.nav.ourStory },
+            { href: '#details', label: t.nav.details },
             { href: '#events',  label: t.nav.events },
             { href: '#venue',   label: t.nav.venue },
             { href: '#rsvp',    label: t.nav.rsvp },
@@ -46,7 +43,7 @@ export default function FooterSection() {
               key={href}
               href={href}
               className="text-[10px] tracking-widest uppercase hover:text-[#D8B36A] transition-colors"
-              style={{ color: '#A99F95', fontFamily: "'Cormorant Garamond', serif" }}
+              style={{ color: '#A99F95', fontFamily: 'var(--font-body)' }}
             >
               {label}
             </a>

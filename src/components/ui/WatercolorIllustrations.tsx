@@ -189,7 +189,7 @@ export function WaxSeal({ className = '', size = 60 }: { className?: string; siz
       ))}
       <circle cx="30" cy="30" r="22" fill="url(#wg1)" />
       <circle cx="30" cy="30" r="18" stroke="#D8B36A" strokeWidth="0.5" fill="none" opacity="0.6" />
-      <text x="30" y="35" textAnchor="middle" fontFamily="'Pinyon Script', cursive" fontSize="13" fill="#D8B36A">M&P</text>
+      <text x="30" y="35" textAnchor="middle" fontFamily="var(--font-heading)" fontSize="13" fill="#D8B36A">M&P</text>
     </svg>
   );
 }
@@ -288,6 +288,24 @@ export function TornEdge({
     >
       <path d={d} fill={color} />
     </svg>
+  );
+}
+
+// ── Faint invitation-frame backdrop (subtle floral touch) ─────
+export function FloralBackdrop({ opacity = 0.08 }: { opacity?: number }) {
+  return (
+    <div
+      className="absolute inset-0 pointer-events-none"
+      aria-hidden
+      style={{
+        backgroundImage: 'url(/images/invitation-back.png)',
+        backgroundSize: 'cover',
+        backgroundPosition: 'center top',
+        backgroundRepeat: 'no-repeat',
+        opacity,
+        mixBlendMode: 'multiply',
+      }}
+    />
   );
 }
 

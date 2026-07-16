@@ -94,10 +94,10 @@ export default function AdminPage() {
             backdropFilter: 'blur(8px)',
           }}
         >
-          <p className="text-xs tracking-[0.3em] uppercase mb-2" style={{ color: gold, fontFamily: "'Cinzel', serif" }}>
+          <p className="text-xs tracking-[0.3em] uppercase mb-2" style={{ color: gold, fontFamily: 'var(--font-body)' }}>
             Mohamed &amp; Gelan
           </p>
-          <h1 className="mb-8" style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: '1.8rem', color: ivory }}>
+          <h1 className="mb-8" style={{ fontFamily: 'var(--font-body)', fontSize: '1.8rem', color: ivory }}>
             Admin Panel
           </h1>
           <input
@@ -107,18 +107,18 @@ export default function AdminPage() {
             placeholder="Password"
             autoFocus
             className="w-full bg-transparent text-center py-3 mb-6 outline-none"
-            style={{ color: ivory, borderBottom: `1px solid ${gold}`, fontFamily: "'Cormorant Garamond', serif", fontSize: '1.1rem' }}
+            style={{ color: ivory, borderBottom: `1px solid ${gold}`, fontFamily: 'var(--font-body)', fontSize: '1.1rem' }}
           />
           <button
             type="submit"
             disabled={loading || !password}
             className="w-full py-3 text-xs tracking-[0.25em] uppercase transition-opacity disabled:opacity-50"
-            style={{ background: gold, color: burgundy, fontFamily: "'Cinzel', serif" }}
+            style={{ background: gold, color: burgundy, fontFamily: 'var(--font-body)' }}
           >
             {loading ? 'Checking…' : 'Enter'}
           </button>
           {error && (
-            <p className="mt-5 text-sm" style={{ color: '#e07070', fontFamily: "'Cormorant Garamond', serif" }}>{error}</p>
+            <p className="mt-5 text-sm" style={{ color: '#e07070', fontFamily: 'var(--font-body)' }}>{error}</p>
           )}
         </form>
       </main>
@@ -139,10 +139,10 @@ export default function AdminPage() {
         {/* Header */}
         <div className="flex flex-wrap items-end justify-between gap-4 mb-10">
           <div>
-            <p className="text-xs tracking-[0.3em] uppercase" style={{ color: gold, fontFamily: "'Cinzel', serif" }}>
+            <p className="text-xs tracking-[0.3em] uppercase" style={{ color: gold, fontFamily: 'var(--font-body)' }}>
               Mohamed &amp; Gelan · 30.09.2026
             </p>
-            <h1 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: '2.2rem', color: burgundy }}>
+            <h1 style={{ fontFamily: 'var(--font-body)', fontSize: '2.2rem', color: burgundy }}>
               RSVP Dashboard
             </h1>
           </div>
@@ -151,7 +151,7 @@ export default function AdminPage() {
               onClick={() => load(password)}
               disabled={loading}
               className="px-5 py-2 text-xs tracking-[0.2em] uppercase disabled:opacity-50"
-              style={{ border: `1px solid ${burgundy}`, color: burgundy, fontFamily: "'Cinzel', serif" }}
+              style={{ border: `1px solid ${burgundy}`, color: burgundy, fontFamily: 'var(--font-body)' }}
             >
               {loading ? 'Loading…' : 'Refresh'}
             </button>
@@ -159,7 +159,7 @@ export default function AdminPage() {
               onClick={exportCsv}
               disabled={rows.length === 0}
               className="px-5 py-2 text-xs tracking-[0.2em] uppercase disabled:opacity-50"
-              style={{ background: burgundy, color: ivory, fontFamily: "'Cinzel', serif" }}
+              style={{ background: burgundy, color: ivory, fontFamily: 'var(--font-body)' }}
             >
               Export CSV
             </button>
@@ -171,10 +171,10 @@ export default function AdminPage() {
           {stats.map((s) => (
             <div key={s.label} className="px-6 py-6 text-center"
               style={{ background: '#FFFFFF', border: '1px solid rgba(216,179,106,0.4)' }}>
-              <p style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: '2.4rem', color: burgundy, lineHeight: 1 }}>
+              <p style={{ fontFamily: 'var(--font-body)', fontSize: '2.4rem', color: burgundy, lineHeight: 1 }}>
                 {s.value}
               </p>
-              <p className="mt-2 text-[0.65rem] tracking-[0.2em] uppercase" style={{ color: '#A99F95', fontFamily: "'Cinzel', serif" }}>
+              <p className="mt-2 text-[0.65rem] tracking-[0.2em] uppercase" style={{ color: '#A99F95', fontFamily: 'var(--font-body)' }}>
                 {s.label}
               </p>
             </div>
@@ -189,7 +189,7 @@ export default function AdminPage() {
               onClick={() => setFilter(key)}
               className="px-4 py-1.5 text-[0.65rem] tracking-[0.2em] uppercase"
               style={{
-                fontFamily: "'Cinzel', serif",
+                fontFamily: 'var(--font-body)',
                 background: filter === key ? burgundy : 'transparent',
                 color: filter === key ? ivory : burgundy,
                 border: `1px solid ${filter === key ? burgundy : 'rgba(92,17,30,0.3)'}`,
@@ -202,12 +202,12 @@ export default function AdminPage() {
 
         {/* Table */}
         <div className="overflow-x-auto" style={{ background: '#FFFFFF', border: '1px solid rgba(216,179,106,0.4)' }}>
-          <table className="w-full text-left" style={{ fontFamily: "'Cormorant Garamond', serif" }}>
+          <table className="w-full text-left" style={{ fontFamily: 'var(--font-body)' }}>
             <thead>
               <tr style={{ borderBottom: `1px solid ${gold}` }}>
                 {['Date', 'Name', 'Phone', 'Guests', 'Guest Names', 'Event', 'Status'].map((h) => (
                   <th key={h} className="px-4 py-3 text-[0.65rem] tracking-[0.2em] uppercase whitespace-nowrap"
-                    style={{ color: '#8a6d4a', fontFamily: "'Cinzel', serif" }}>
+                    style={{ color: '#8a6d4a', fontFamily: 'var(--font-body)' }}>
                     {h}
                   </th>
                 ))}
@@ -236,7 +236,7 @@ export default function AdminPage() {
                   <td className="px-4 py-3">
                     <span className="px-3 py-1 text-[0.6rem] tracking-[0.15em] uppercase whitespace-nowrap"
                       style={{
-                        fontFamily: "'Cinzel', serif",
+                        fontFamily: 'var(--font-body)',
                         background: String(r.attending).toLowerCase() === 'yes' ? 'rgba(216,179,106,0.2)' : 'rgba(92,17,30,0.08)',
                         color: String(r.attending).toLowerCase() === 'yes' ? '#8a6d4a' : burgundy,
                       }}>
@@ -252,7 +252,7 @@ export default function AdminPage() {
         <button
           onClick={() => { sessionStorage.removeItem('admin-pw'); setAuthed(false); setPassword(''); setRows([]); }}
           className="mt-8 text-[0.65rem] tracking-[0.2em] uppercase"
-          style={{ color: '#A99F95', fontFamily: "'Cinzel', serif" }}
+          style={{ color: '#A99F95', fontFamily: 'var(--font-body)' }}
         >
           Log out
         </button>

@@ -75,7 +75,7 @@ export default function OurStorySection() {
           viewport={{ once: true, margin: '-60px' }}
           transition={{ duration: 0.8 }}
           className="mt-10"
-          style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: '1.15rem', color: '#e7d9cf', lineHeight: 2 }}
+          style={{ fontFamily: 'var(--font-body)', fontSize: '1.15rem', color: '#e7d9cf', lineHeight: 2 }}
         >
           {t.story.para}
         </motion.p>

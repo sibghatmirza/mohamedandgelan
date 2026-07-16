@@ -57,12 +57,12 @@ export default function RSVPSection() {
   };
 
   const labelCls = 'block text-xs tracking-widest mb-2';
-  const labelStyle = { color: '#D8B36A', fontFamily: "'Cormorant Garamond', serif" };
+  const labelStyle = { color: '#D8B36A', fontFamily: 'var(--font-body)' };
 
   return (
     <section
       id="rsvp"
-      className="relative py-24 px-6 overflow-x-clip"
+      className="relative py-14 px-6 overflow-x-clip"
       style={{ background: 'linear-gradient(160deg, #5C111E 0%, #3a0b14 50%, #5C111E 100%)' }}
     >
       <TornEdge position="top" color="#5C111E" />
@@ -81,7 +81,7 @@ export default function RSVPSection() {
           <p className="section-subtitle mb-4" style={{ color: '#D8B36A' }}>{t.rsvp.subtitle}</p>
           <h2 className="section-title" style={{ color: '#FAF7F2' }}>{t.rsvp.title}</h2>
           <WatercolorDivider />
-          <p style={{ fontFamily: "'Cormorant Garamond', serif", color: '#A99F95', fontSize: '0.9rem', letterSpacing: '0.1em' }}>
+          <p style={{ fontFamily: 'var(--font-body)', color: '#A99F95', fontSize: '0.9rem', letterSpacing: '0.1em' }}>
             {t.rsvp.deadline}
           </p>
         </motion.div>
@@ -90,16 +90,16 @@ export default function RSVPSection() {
           {status === 'success' && (
             <motion.div key="success" initial={{ opacity: 0, scale: 0.8 }} animate={{ opacity: 1, scale: 1 }}
               className="text-center py-16 flex flex-col items-center gap-6">
-              <h3 style={{ fontFamily: "'Pinyon Script', cursive", fontSize: '2.5rem', color: '#FAF7F2' }}>{t.rsvp.thankYou}</h3>
-              <p style={{ fontFamily: "'Cormorant Garamond', serif", color: '#D8B36A', fontSize: '1.1rem' }}>{t.rsvp.success}</p>
+              <h3 style={{ fontFamily: 'var(--font-heading)', fontSize: '2.5rem', color: '#FAF7F2' }}>{t.rsvp.thankYou}</h3>
+              <p style={{ fontFamily: 'var(--font-body)', color: '#D8B36A', fontSize: '1.1rem' }}>{t.rsvp.success}</p>
             </motion.div>
           )}
 
           {status === 'declined' && (
             <motion.div key="declined" initial={{ opacity: 0, scale: 0.8 }} animate={{ opacity: 1, scale: 1 }}
               className="text-center py-16 flex flex-col items-center gap-6">
-              <h3 style={{ fontFamily: "'Pinyon Script', cursive", fontSize: '2.5rem', color: '#FAF7F2' }}>{t.rsvp.understand}</h3>
-              <p style={{ fontFamily: "'Cormorant Garamond', serif", color: '#D8B36A', fontSize: '1.1rem' }}>{t.rsvp.successDecline}</p>
+              <h3 style={{ fontFamily: 'var(--font-heading)', fontSize: '2.5rem', color: '#FAF7F2' }}>{t.rsvp.understand}</h3>
+              <p style={{ fontFamily: 'var(--font-body)', color: '#D8B36A', fontSize: '1.1rem' }}>{t.rsvp.successDecline}</p>
             </motion.div>
           )}
 
@@ -177,7 +177,7 @@ export default function RSVPSection() {
               </div>
 
               {status === 'error' && (
-                <p className="text-center" style={{ color: '#e07070', fontFamily: "'Cormorant Garamond', serif" }}>
+                <p className="text-center" style={{ color: '#e07070', fontFamily: 'var(--font-body)' }}>
                   Something went wrong. Please try again.
                 </p>
               )}

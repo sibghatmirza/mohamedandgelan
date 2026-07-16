@@ -21,7 +21,7 @@ export const translations = {
       contact: 'Contact',
     },
     hero: {
-      coupleNames: 'Mohamed & Gelan',
+      coupleNames: 'Mohamed AlSaba & Gelan Badr',
       weddingDate: 'September 30, 2026',
       location: 'Al-Ali Al-Azeem Mosque · Heliopolis, Cairo',
       rsvpBtn: 'RSVP Now',
@@ -47,7 +47,7 @@ export const translations = {
     },
     card: {
       bismillah: 'In the name of God, the Most Gracious, the Most Merciful',
-      ceremony: 'You are cordially invited to attend the Katb Al-Kitab (Nikah) ceremony of',
+      ceremony: 'You are cordially invited to attend the Katb Al-Kitab ceremony of',
       body1: 'We look forward to sharing this special occasion with you and your family as we celebrate this blessed union.',
       body2: 'Your presence will make this joyous day even more meaningful.',
       dateLine: 'Date: 30.09.2026',
@@ -130,14 +130,12 @@ export const translations = {
       },
     },
     events: {
-      title: 'Event Schedule',
+      title: 'Agenda',
       subtitle: 'Every Beautiful Moment',
       items: [
-        { name: 'Guests to be Seated', time: '5:00 PM', icon: 'chair' },
-        { name: 'Wedding Ceremony',    time: '5:15 PM', icon: 'rings' },
-        { name: 'Reception',           time: '5:50 PM', icon: 'chandelier' },
-        { name: 'Dinner',              time: '7:00 PM', icon: 'plate' },
-        { name: 'Cake Cutting',        time: '7:45 PM', icon: 'cake' },
+        { name: 'Guest Seating',        time: '5:00 PM', icon: 'chair' },
+        { name: 'Khateb & Katb Al-Kitab', time: '5:30 PM', icon: 'rings' },
+        { name: 'Dinner',               time: '7:00 PM', icon: 'plate' },
       ],
     },
     venue: {
@@ -150,8 +148,9 @@ export const translations = {
       parking: 'On-site and street parking available nearby.',
       mapQuery: MAP_QUERY,
       mapsLink: MAPS_LINK,
-      hotels: 'Nearby Hotels',
-      book: 'Book Here',
+      hotels: 'Accommodation',
+      hotelsSubtitle: 'Where to Stay',
+      book: 'Book Now',
       hotelList: [
         { name: 'Fairmont Heliopolis', distance: '2.5 km', note: 'Five-star luxury in the heart of Heliopolis.', url: 'https://www.booking.com/searchresults.html?ss=Fairmont+Heliopolis+Cairo' },
         { name: 'Le Méridien Cairo Airport', distance: '5 km', note: 'Elegant comfort near the airport.', url: 'https://www.booking.com/searchresults.html?ss=Le+Meridien+Cairo+Airport' },
@@ -201,10 +200,10 @@ export const translations = {
       reference: 'Quran 7:189',
     },
     cruise: {
-      script: 'Rsvp',
-      title: 'Join us for the Nile Cruise',
-      timeLabel: 'Time',
-      timeValue: '9:45 PM – 1:00 AM',
+      heroSubtitle: 'Where the celebration continues',
+      heroTitle: 'Shebo Nile Cruise',
+      boardingTimeLabel: 'Boarding Time',
+      boardingTime: '9:30 PM',
       boardingLabel: 'Boarding Location',
       boardingValue: 'Mamsha Ahl Misr – Gate 3 (in front of Fairmont Nile Towers)',
       rsvpTitle: 'Kindly Respond',
@@ -213,7 +212,7 @@ export const translations = {
     },
     footer: {
       madeWith: 'Made with love',
-      names: 'Mohamed & Gelan',
+      names: 'Mohamed AlSaba & Gelan Badr',
       date: 'September 30, 2026',
     },
     music: {
@@ -237,7 +236,7 @@ export const translations = {
       contact: 'تواصل معنا',
     },
     hero: {
-      coupleNames: 'محمد وجيلان',
+      coupleNames: 'محمد الصبا وجيلان بدر',
       weddingDate: '٣٠ سبتمبر ٢٠٢٦',
       location: 'مسجد العلي العظيم · مصر الجديدة، القاهرة',
       rsvpBtn: 'تأكيد الحضور',
@@ -349,11 +348,9 @@ export const translations = {
       title: 'برنامج الحفل',
       subtitle: 'كل لحظة جميلة',
       items: [
-        { name: 'جلوس الضيوف',   time: '٥:٠٠ م', icon: 'chair' },
-        { name: 'مراسم الزواج',  time: '٥:١٥ م', icon: 'rings' },
-        { name: 'الاستقبال',     time: '٥:٥٠ م', icon: 'chandelier' },
-        { name: 'العشاء',        time: '٧:٠٠ م', icon: 'plate' },
-        { name: 'قطع الكعكة',    time: '٧:٤٥ م', icon: 'cake' },
+        { name: 'جلوس الضيوف',          time: '٥:٠٠ م', icon: 'chair' },
+        { name: 'الخطبة وكتب الكتاب',   time: '٥:٣٠ م', icon: 'rings' },
+        { name: 'العشاء',               time: '٧:٠٠ م', icon: 'plate' },
       ],
     },
     venue: {
@@ -366,8 +363,9 @@ export const translations = {
       parking: 'يتوفر موقف للسيارات في المكان وفي الشوارع المجاورة.',
       mapQuery: MAP_QUERY,
       mapsLink: MAPS_LINK,
-      hotels: 'فنادق قريبة',
-      book: 'احجز هنا',
+      hotels: 'أماكن الإقامة',
+      hotelsSubtitle: 'أين تقيم',
+      book: 'احجز الآن',
       hotelList: [
         { name: 'فيرمونت هليوبوليس', distance: '٢.٥ كم', note: 'فخامة خمس نجوم في قلب مصر الجديدة.', url: 'https://www.booking.com/searchresults.html?ss=Fairmont+Heliopolis+Cairo' },
         { name: 'لو ميريديان مطار القاهرة', distance: '٥ كم', note: 'راحة أنيقة بالقرب من المطار.', url: 'https://www.booking.com/searchresults.html?ss=Le+Meridien+Cairo+Airport' },
@@ -417,10 +415,10 @@ export const translations = {
       reference: 'سورة الأعراف · ١٨٩',
     },
     cruise: {
-      script: 'تفضلوا بالرد',
-      title: 'انضموا إلينا في الرحلة النيلية',
-      timeLabel: 'الوقت',
-      timeValue: '٩:٤٥ مساءً – ١:٠٠ صباحاً',
+      heroSubtitle: 'حيث يستمر الاحتفال',
+      heroTitle: 'رحلة شيبو النيلية',
+      boardingTimeLabel: 'موعد الركوب',
+      boardingTime: '٩:٣٠ مساءً',
       boardingLabel: 'مكان الركوب',
       boardingValue: 'ممشى أهل مصر – بوابة ٣ (أمام أبراج فيرمونت النيل)',
       rsvpTitle: 'تفضل بالرد',
@@ -429,7 +427,7 @@ export const translations = {
     },
     footer: {
       madeWith: 'صُنع بكل حب',
-      names: 'محمد وجيلان',
+      names: 'محمد الصبا وجيلان بدر',
       date: '٣٠ سبتمبر ٢٠٢٦',
     },
     music: {

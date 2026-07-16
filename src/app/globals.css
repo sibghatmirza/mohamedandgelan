@@ -1,5 +1,12 @@
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Cormorant:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Cinzel:wght@400;500;600&family=Cinzel+Decorative:wght@400;700&family=Pinyon+Script&family=Tangerine:wght@400;700&family=Marcellus&family=Italiana&family=Tajawal:wght@300;400;500;700&family=Amiri:ital,wght@0,400;0,700;1,400&family=Aref+Ruqaa:wght@400;700&display=swap');
 @import "tailwindcss";
+
+/* Font families are self-hosted via next/font (see layout.tsx) and exposed
+   as CSS variables. Fallbacks keep text readable before/if a font loads. */
+:root {
+  --font-heading: var(--font-tangerine), 'EB Garamond', Georgia, serif;
+  --font-body: var(--font-eb-garamond), Georgia, serif;
+  --font-ar: var(--font-amiri), 'Amiri', serif;
+}
 
 :root {
   --burgundy: #5C111E;
@@ -22,12 +29,12 @@ html {
 body {
   background: var(--soft-cream);
   color: var(--burgundy);
-  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-family: var(--font-body);
   overflow-x: hidden;
 }
 
 body[dir="rtl"] {
-  font-family: 'Amiri', 'Tajawal', serif;
+  font-family: var(--font-ar);
 }
 
 /* Custom scrollbar */
@@ -38,19 +45,22 @@ body[dir="rtl"] {
 /* Selection */
 ::selection { background: var(--gold); color: var(--burgundy); }
 
-/* Fonts */
-.font-display { font-family: 'Cinzel', Georgia, serif; }          /* refined caps headers */
-.font-script  { font-family: 'Pinyon Script', cursive; }          /* elegant flowing script */
-.font-script-alt { font-family: 'Tangerine', cursive; }
-.font-serif   { font-family: 'Cormorant', Georgia, serif; }
-.font-body    { font-family: 'Cormorant Garamond', Georgia, serif; }
-.font-accent  { font-family: 'Marcellus', Georgia, serif; }
-.font-italiana{ font-family: 'Italiana', Georgia, serif; }
-.font-arabic  { font-family: 'Amiri', 'Tajawal', serif; }
+/* Fonts — Tangerine (headings), EB Garamond (body/everything else), Amiri (Arabic).
+   Locked: only these three families ship, each with a Georgia/serif fallback. */
+.font-display { font-family: var(--font-body); }      /* refined caps headers */
+.font-script  { font-family: var(--font-heading); } /* elegant flowing script */
+.font-script-alt { font-family: var(--font-heading); }
+.font-serif   { font-family: var(--font-body); }
+.font-body    { font-family: var(--font-body); }
+.font-accent  { font-family: var(--font-body); }
+.font-arabic  { font-family: var(--font-ar); }
 
 [dir="rtl"] .font-script,
-[dir="rtl"] .font-script-alt { font-family: 'Aref Ruqaa', 'Amiri', serif; }
-[dir="rtl"] .font-display    { font-family: 'Aref Ruqaa', 'Amiri', serif; }
+[dir="rtl"] .font-script-alt { font-family: var(--font-ar); }
+[dir="rtl"] .font-display    { font-family: var(--font-ar); }
+[dir="rtl"] .font-body,
+[dir="rtl"] .font-serif,
+[dir="rtl"] .font-accent     { font-family: var(--font-ar); }
 
 /* Watercolor texture overlays */
 .texture-paper {
@@ -190,7 +200,7 @@ body[dir="rtl"] {
   justify-content: center;
   gap: 0.5rem;
   padding: 0.9rem 2.5rem;
-  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-family: var(--font-body);
   font-size: 0.95rem;
   font-weight: 500;
   letter-spacing: 0.15em;
@@ -223,20 +233,20 @@ body[dir="rtl"] {
 
 /* Section headings */
 .section-title {
-  font-family: 'Pinyon Script', cursive;
-  font-size: clamp(3rem, 7vw, 5.5rem);
+  font-family: var(--font-heading);
+  font-size: clamp(3.6rem, 8vw, 6.5rem);
   color: var(--burgundy);
-  line-height: 1.1;
-  font-weight: 400;
+  line-height: 1.05;
+  font-weight: 700;
 }
 
 [dir="rtl"] .section-title {
-  font-family: 'Aref Ruqaa', 'Amiri', serif;
+  font-family: var(--font-ar);
   font-size: clamp(2.2rem, 5vw, 4rem);
 }
 
 .section-subtitle {
-  font-family: 'Cinzel', serif;
+  font-family: var(--font-body);
   font-size: clamp(0.7rem, 1.4vw, 0.85rem);
   letter-spacing: 0.35em;
   text-transform: uppercase;
@@ -245,20 +255,20 @@ body[dir="rtl"] {
 }
 
 [dir="rtl"] .section-subtitle {
-  font-family: 'Amiri', serif;
+  font-family: var(--font-ar);
   letter-spacing: 0.1em;
 }
 
 /* Refined caps label (like reference DATE / CEREMONY) */
 .caps-label {
-  font-family: 'Cinzel', serif;
+  font-family: var(--font-body);
   letter-spacing: 0.25em;
   text-transform: uppercase;
   color: var(--burgundy);
   font-weight: 500;
 }
 
-[dir="rtl"] .caps-label { font-family: 'Amiri', serif; letter-spacing: 0; }
+[dir="rtl"] .caps-label { font-family: var(--font-ar); letter-spacing: 0; }
 
 /* Antique gold picture frame */
 .antique-frame {
@@ -311,7 +321,7 @@ body[dir="rtl"] {
   border: none;
   border-bottom: 1px solid var(--gold);
   padding: 0.75rem 0;
-  font-family: 'EB Garamond', Georgia, serif;
+  font-family: var(--font-body);
   font-size: 1rem;
   color: var(--burgundy);
   outline: none;

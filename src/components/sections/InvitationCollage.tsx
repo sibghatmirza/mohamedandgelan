@@ -3,8 +3,7 @@
 import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import { useLang } from '@/context/LanguageContext';
-import { Polaroid, OrnateCard } from '@/components/ui/Collage';
-import { Monogram } from '@/components/ui/WatercolorIllustrations';
+import { Polaroid } from '@/components/ui/Collage';
 
 const WEDDING_DATE = new Date('2026-09-30T17:00:00');
 function useCountdown() {
@@ -35,7 +34,6 @@ const fade = {
 export default function InvitationCollage() {
   const { t } = useLang();
   const inv = t.invitation;
-  const card = t.card;
   const c = useCountdown();
   const pad = (n: number) => String(n).padStart(2, '0');
 
@@ -50,56 +48,20 @@ export default function InvitationCollage() {
 
       <div className="relative max-w-md mx-auto flex flex-col items-center">
 
-        {/* ── Envelope + date ─────────────────────────── */}
-        <motion.div {...fade} transition={{ duration: 0.8 }} className="relative w-full flex flex-col items-center">
-          <p className="section-subtitle mb-3">{inv.youAreInvited}</p>
-
-          {/* Formal invitation card */}
-          <div className="relative mt-2 w-full">
-            {/* bouquets peeking from behind the card */}
-            <div className="absolute pointer-events-none animate-float-slow" style={{ width: '58%', top: '14%', left: '-24%' }}>
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src="/images/bouquet.png" alt="" aria-hidden className="select-none w-full"
-                style={{ transform: 'rotate(-24deg)' }} />
-            </div>
-            <div className="absolute pointer-events-none animate-float-slow" style={{ width: '58%', top: '38%', right: '-24%', animationDelay: '-3.5s' }}>
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src="/images/bouquet.png" alt="" aria-hidden className="select-none w-full"
-                style={{ transform: 'rotate(26deg) scaleX(-1)' }} />
-            </div>
-            <motion.div
-              initial={{ opacity: 0, scale: 0.94, y: 24 }}
-              whileInView={{ opacity: 1, scale: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
-            >
-            <OrnateCard className="relative">
-              <Monogram color="burgundy" size={78} className="mb-3" />
-              <p className="font-arabic" dir="rtl" style={{ fontSize: 'clamp(1.1rem,4vw,1.4rem)', color: '#5C111E', lineHeight: 1.5 }}>بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</p>
-              {t.dir === 'ltr' && (
-                <p className="font-body mt-1" style={{ fontSize: 'clamp(0.6rem,2vw,0.72rem)', color: '#A99F95', lineHeight: 1.4 }}>{card.bismillah}</p>
-              )}
-              <p className="caps-label mt-3" style={{ fontSize: 'clamp(0.5rem,1.7vw,0.6rem)', color: '#8a6d4a', lineHeight: 1.7 }}>{card.ceremony}</p>
-
-              <h2 className="font-script mt-2" style={{ fontSize: 'clamp(1.5rem,6vw,2.1rem)', color: '#5C111E', lineHeight: 1.05, whiteSpace: 'nowrap' }}>
-                {inv.groom}
-              </h2>
-              <p className={t.dir === 'rtl' ? 'font-arabic' : 'font-script'} style={{ fontSize: 'clamp(1.2rem,4vw,1.5rem)', color: '#D8B36A', lineHeight: 1 }}>{inv.ampersand}</p>
-              <h2 className="font-script" style={{ fontSize: 'clamp(1.5rem,6vw,2.1rem)', color: '#5C111E', lineHeight: 1.05, whiteSpace: 'nowrap' }}>
-                {inv.bride}
-              </h2>
-
-              <p className="font-body mt-3 mx-auto" style={{ fontSize: 'clamp(0.7rem,2.3vw,0.85rem)', color: '#6b5e56', lineHeight: 1.55, maxWidth: 300 }}>{card.body1}</p>
-              <p className="font-body mt-2 mx-auto" style={{ fontSize: 'clamp(0.7rem,2.3vw,0.85rem)', color: '#6b5e56', lineHeight: 1.55, maxWidth: 300 }}>{card.body2}</p>
-
-              <div className="w-10 h-px mx-auto my-3" style={{ background: '#D8B36A' }} />
-
-              <p className="font-accent" style={{ fontSize: 'clamp(0.72rem,2.4vw,0.88rem)', color: '#5C111E', letterSpacing: '0.04em' }}>{card.dateLine}</p>
-              <p className="font-accent" style={{ fontSize: 'clamp(0.72rem,2.4vw,0.88rem)', color: '#5C111E', letterSpacing: '0.04em' }}>{card.timeLine}</p>
-              <p className="font-accent mt-1 mx-auto" style={{ fontSize: 'clamp(0.72rem,2.4vw,0.88rem)', color: '#5C111E', letterSpacing: '0.04em', maxWidth: 250 }}>{card.venueLine}</p>
-            </OrnateCard>
-            </motion.div>
-          </div>
+        {/* ── Quran verse ─────────────────────────────── */}
+        <motion.div {...fade} transition={{ duration: 0.9 }} className="text-center mt-6">
+          <p className="font-arabic mx-auto" dir="rtl" style={{ fontSize: 'clamp(1.3rem,4.5vw,1.8rem)', color: '#5C111E', lineHeight: 1.9 }}>
+            خَلَقَكُم مِّن نَّفْسٍ وَاحِدَةٍ وَخَلَقَ مِنْهَا زَوْجَهَا
+          </p>
+          {t.quran.translation && (
+            <p className="font-body mt-3 mx-auto" style={{ fontSize: 'clamp(0.85rem,2.6vw,1rem)', color: '#6b5e56', lineHeight: 1.6, fontStyle: 'italic', maxWidth: 460 }}>
+              {t.quran.translation}
+            </p>
+          )}
+          <p className={t.dir === 'rtl' ? 'font-arabic mt-3' : 'caps-label mt-3'} dir={t.dir}
+            style={{ fontSize: t.dir === 'rtl' ? '0.9rem' : '0.62rem', color: '#A99F95', letterSpacing: t.dir === 'rtl' ? undefined : '0.2em' }}>
+            {t.quran.reference}
+          </p>
         </motion.div>
 
         {/* ── Polaroids ──────────────────────── */}
@@ -136,26 +98,42 @@ export default function InvitationCollage() {
 
         {/* ── Countdown ────────────────────────────────── */}
         <motion.div {...fade} transition={{ duration: 0.8 }}
-          className="mt-12 w-full max-w-sm px-6 py-5 text-center"
-          style={{ background: 'linear-gradient(160deg,#6e1422,#5C111E)', borderRadius: 6, boxShadow: '0 16px 38px rgba(92,17,30,0.3)' }}>
-          <div className="flex justify-center gap-4">
-            {[[t.countdown.days, c.d], [t.countdown.hours, c.h], [t.countdown.minutes, c.m], [t.countdown.seconds, c.s]].map(([label, val]) => (
-              <div key={label as string} className="flex flex-col items-center">
-                <motion.span
-                  key={`${label}-${val}`}
-                  initial={{ opacity: 0.3, y: -6 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.35 }}
-                  className="font-body"
-                  style={{ fontSize: '1.8rem', color: '#FAF7F2', lineHeight: 1 }}
-                >
-                  {pad(val as number)}
-                </motion.span>
-                <span className="caps-label" style={{ fontSize: '0.55rem', color: '#D8B36A', marginTop: 4 }}>{label as string}</span>
-              </div>
+          className="mt-12 w-full px-6 py-14 text-center"
+          style={{ background: 'radial-gradient(140% 130% at 50% 0%, #6e1422 0%, #4a0d18 55%, #380a13 100%)' }}>
+          <p className="caps-label" style={{ fontSize: 'clamp(0.75rem,2.6vw,1.05rem)', color: '#D8B36A', letterSpacing: '0.3em' }}>
+            {t.countdown.title}
+          </p>
+          {/* gold divider */}
+          <div className="flex items-center justify-center gap-2 mt-4 mb-9" aria-hidden>
+            <div className="h-px w-16" style={{ background: 'linear-gradient(to right, transparent, #D8B36A)' }} />
+            <span style={{ color: '#D8B36A', fontSize: '0.65rem' }}>◆</span>
+            <div className="h-px w-16" style={{ background: 'linear-gradient(to left, transparent, #D8B36A)' }} />
+          </div>
+          <div className="flex justify-center items-start gap-2 sm:gap-4">
+            {[[t.countdown.days, c.d], [t.countdown.hours, c.h], [t.countdown.minutes, c.m], [t.countdown.seconds, c.s]].map(([label, val], i) => (
+              <React.Fragment key={label as string}>
+                {i > 0 && (
+                  <span className="font-body" style={{ fontSize: 'clamp(1.3rem,4vw,2rem)', color: '#D8B36A', lineHeight: 1, marginTop: 'clamp(0.85rem,4.5vw,2rem)' }}>:</span>
+                )}
+                <div className="flex flex-col items-center gap-3">
+                  <div className="flex items-center justify-center"
+                    style={{ width: 'clamp(60px,17vw,120px)', height: 'clamp(60px,17vw,120px)', background: '#E3DAD2' }}>
+                    <motion.span
+                      key={`${label}-${val}`}
+                      initial={{ opacity: 0.3, y: -6 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.35 }}
+                      className="font-body"
+                      style={{ fontSize: 'clamp(1.8rem,7vw,3.4rem)', color: '#5C111E', lineHeight: 1 }}
+                    >
+                      {pad(val as number)}
+                    </motion.span>
+                  </div>
+                  <span className="caps-label" style={{ fontSize: 'clamp(0.55rem,1.9vw,0.85rem)', color: '#E3DAD2', letterSpacing: '0.22em' }}>{label as string}</span>
+                </div>
+              </React.Fragment>
             ))}
           </div>
-          <p className="caps-label mt-4" style={{ fontSize: '0.62rem', color: '#D8B36A' }}>{t.countdown.title}</p>
         </motion.div>
 
         {/* scroll hint */}

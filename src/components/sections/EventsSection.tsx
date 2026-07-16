@@ -3,7 +3,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { useLang } from '@/context/LanguageContext';
-import { WatercolorDivider, TornEdge, WatercolorWash, LilyDivider } from '@/components/ui/WatercolorIllustrations';
+import { WatercolorDivider, TornEdge, WatercolorWash, FloralBackdrop } from '@/components/ui/WatercolorIllustrations';
 import { lineIconMap } from '@/components/ui/LineIcons';
 
 export default function EventsSection() {
@@ -13,11 +13,12 @@ export default function EventsSection() {
   return (
     <section
       id="events"
-      className="relative py-24 px-6 overflow-x-clip"
+      className="relative py-14 px-6 overflow-x-clip"
       style={{ background: 'linear-gradient(160deg, #EAE2D8 0%, #F7F3EE 100%)' }}
     >
       <TornEdge position="top" color="#EAE2D8" />
       <WatercolorWash />
+      <FloralBackdrop opacity={0.06} />
 
       <div className="max-w-2xl mx-auto relative z-10 text-center">
         {/* Header */}
@@ -33,7 +34,7 @@ export default function EventsSection() {
         </motion.div>
 
         {/* Vertical timeline */}
-        <div className="relative mt-12">
+        <div className="relative mt-8">
           {/* center line */}
           <motion.div
             className="absolute left-1/2 top-2 bottom-2 w-px -translate-x-1/2 origin-top"
@@ -44,7 +45,7 @@ export default function EventsSection() {
             transition={{ duration: 1.4, ease: 'easeInOut' }}
           />
 
-          <div className="flex flex-col gap-12">
+          <div className="flex flex-col gap-8">
             {items.map((ev, i) => {
               const Icon = lineIconMap[ev.icon] ?? lineIconMap.cheers;
               return (
@@ -69,7 +70,7 @@ export default function EventsSection() {
                   <p className="font-body" style={{ fontSize: '1.05rem', letterSpacing: '0.15em', color: '#D8B36A' }}>
                     {ev.time}
                   </p>
-                  <h3 style={{ fontFamily: "'Marcellus', serif", fontSize: '1.4rem', color: '#5C111E' }}>
+                  <h3 style={{ fontFamily: 'var(--font-body)', fontSize: '1.4rem', color: '#5C111E' }}>
                     {ev.name}
                   </h3>
                 </motion.div>
@@ -77,8 +78,6 @@ export default function EventsSection() {
             })}
           </div>
         </div>
-
-        <LilyDivider className="mt-14" />
       </div>
 
     </section>

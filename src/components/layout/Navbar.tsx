@@ -8,8 +8,8 @@ import { Monogram } from '@/components/ui/WatercolorIllustrations';
 const navLinks = (t: ReturnType<typeof useLang>['t']) => [
   { href: '#home',       label: t.nav.home },
   { href: '#details',    label: t.nav.details },
+  { href: '#events',     label: t.nav.events },
   { href: '#venue',      label: t.nav.venue },
-  { href: '#story',      label: t.nav.ourStory },
   { href: '#rsvp',       label: t.nav.rsvp },
 ];
 
@@ -49,7 +49,7 @@ export default function Navbar() {
               <a
                 href={href}
                 className="text-[0.72rem] tracking-[0.18em] uppercase transition-colors duration-300 hover:text-[#D8B36A]"
-                style={{ color: '#5C111E', fontFamily: "'Cinzel', serif", fontWeight: 500 }}
+                style={{ color: '#5C111E', fontFamily: 'var(--font-body)', fontWeight: 500 }}
               >
                 {label}
               </a>
@@ -60,7 +60,7 @@ export default function Navbar() {
         {/* Right: Language + mobile menu */}
         <div className="flex items-center gap-4">
           {/* Language toggle */}
-          <div className="flex items-center gap-1 text-xs tracking-widest" style={{ fontFamily: "'Cormorant Garamond', serif" }}>
+          <div className="flex items-center gap-1 text-xs tracking-widest" style={{ fontFamily: 'var(--font-body)' }}>
             <button
               onClick={() => setLang('en')}
               className={`px-2 py-1 transition-colors duration-200 ${lang === 'en' ? 'text-[#D8B36A] border-b border-[#D8B36A]' : 'text-[#5C111E]'}`}
@@ -110,7 +110,7 @@ export default function Navbar() {
                     href={href}
                     onClick={() => setMenuOpen(false)}
                     className="font-display text-base tracking-widest uppercase text-[#5C111E] hover:text-[#D8B36A] transition-colors"
-                    style={{ fontFamily: "'Cormorant Garamond', serif" }}
+                    style={{ fontFamily: 'var(--font-body)' }}
                   >
                     {label}
                   </a>
