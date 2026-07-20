@@ -3,7 +3,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { useLang } from '@/context/LanguageContext';
-import { WatercolorDivider, TornEdge, WatercolorWash, FloralBackdrop } from '@/components/ui/WatercolorIllustrations';
+import { WatercolorDivider, WatercolorWash, FloralBackdrop } from '@/components/ui/WatercolorIllustrations';
 
 export default function VenueSection() {
   const { t } = useLang();
@@ -14,7 +14,6 @@ export default function VenueSection() {
       className="relative py-14 px-6 overflow-x-clip"
       style={{ background: 'linear-gradient(160deg, #FAF7F2 0%, #EAE2D8 100%)' }}
     >
-      <TornEdge position="top" color="#FAF7F2" />
       <WatercolorWash />
       <FloralBackdrop opacity={0.08} />
 

@@ -24,19 +24,20 @@ export default function InvitationHero() {
   return (
     <section
       id="home"
-      className="relative w-full flex flex-col items-center justify-center text-center px-6 py-20"
+      className="relative w-full flex flex-col items-center justify-start text-center px-6 pb-24"
       style={{
         backgroundImage: 'url(/images/invitation-back.png)',
         backgroundSize: 'cover',
-        backgroundPosition: 'center',
+        backgroundPosition: 'center bottom',
         backgroundRepeat: 'no-repeat',
         minHeight: '100svh',
+        paddingTop: 'clamp(7rem, 17vh, 12rem)',
       }}
     >
       <div className="relative z-10 w-full max-w-2xl mx-auto flex flex-col items-center">
-        {/* monogram */}
+        {/* monogram — golden, clear of the fabric drape, with space above the Bismillah */}
         <motion.div {...rise} transition={{ duration: 0.7 }}>
-          <Monogram color="burgundy" size={92} className="mb-6" />
+          <Monogram color="gold" size={96} className="mb-10" />
         </motion.div>
 
         {/* Bismillah — Arabic first */}
@@ -60,15 +61,17 @@ export default function InvitationHero() {
           </motion.p>
         )}
 
-        {/* ceremony line */}
-        <motion.p
-          {...rise}
-          transition={{ duration: 0.7, delay: 0.25 }}
-          className="font-body mt-9 mx-auto"
-          style={{ fontSize: 'clamp(1rem, 2.6vw, 1.15rem)', color: MUTED, lineHeight: 1.6, maxWidth: 540 }}
-        >
-          {card.ceremony}
-        </motion.p>
+        {/* ceremony line (skipped when empty, e.g. Arabic) */}
+        {card.ceremony && (
+          <motion.p
+            {...rise}
+            transition={{ duration: 0.7, delay: 0.25 }}
+            className="font-body mt-9 mx-auto"
+            style={{ fontSize: 'clamp(1rem, 2.6vw, 1.15rem)', color: MUTED, lineHeight: 1.6, maxWidth: 540 }}
+          >
+            {card.ceremony}
+          </motion.p>
+        )}
 
         {/* full names */}
         <motion.h1
@@ -136,13 +139,6 @@ export default function InvitationHero() {
           {t.quran.reference}
         </motion.p>
       </div>
-
-      {/* bottom fade so the section melts into the burgundy countdown below */}
-      <div
-        className="absolute inset-x-0 bottom-0 pointer-events-none"
-        style={{ height: 140, background: 'linear-gradient(to bottom, transparent, #6e1422)' }}
-        aria-hidden
-      />
     </section>
   );
 }

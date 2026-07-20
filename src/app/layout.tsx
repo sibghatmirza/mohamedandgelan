@@ -29,11 +29,11 @@ const amiri = Amiri({
 });
 
 export const metadata: Metadata = {
-  title: 'Mohamed & Gelan — Wedding 2026',
+  title: 'Mohamed AlSaba & Gelan Badr — Wedding 2026',
   description: 'We invite you to join us in celebrating our wedding. September 30, 2026 · Heliopolis, Cairo.',
-  keywords: ['wedding', 'Mohamed', 'Gelan', 'Cairo', 'Heliopolis', '2026'],
+  keywords: ['wedding', 'Mohamed AlSaba', 'Gelan Badr', 'Cairo', 'Heliopolis', '2026'],
   openGraph: {
-    title: 'Mohamed & Gelan — Wedding 2026',
+    title: 'Mohamed AlSaba & Gelan Badr — Wedding 2026',
     description: 'Join us in celebrating our wedding. September 30, 2026.',
     type: 'website',
   },

@@ -3,7 +3,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { useLang } from '@/context/LanguageContext';
-import { WatercolorDivider, GoldLeaf, TornEdge, WatercolorWash, FloralBackdrop } from '@/components/ui/WatercolorIllustrations';
+import { WatercolorDivider, GoldLeaf, WatercolorWash, FloralBackdrop } from '@/components/ui/WatercolorIllustrations';
 
 export default function AccommodationSection() {
   const { t } = useLang();
@@ -14,7 +14,6 @@ export default function AccommodationSection() {
       className="relative py-14 px-6 overflow-x-clip"
       style={{ background: 'linear-gradient(160deg, #EAE2D8 0%, #FAF7F2 100%)' }}
     >
-      <TornEdge position="top" color="#EAE2D8" />
       <WatercolorWash />
       <FloralBackdrop opacity={0.07} />
 

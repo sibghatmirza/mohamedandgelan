@@ -3,7 +3,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { useLang } from '@/context/LanguageContext';
-import { WatercolorDivider, TornEdge, WatercolorWash, FloralBackdrop } from '@/components/ui/WatercolorIllustrations';
+import { WatercolorDivider, WatercolorWash, FloralBackdrop } from '@/components/ui/WatercolorIllustrations';
 import { lineIconMap } from '@/components/ui/LineIcons';
 
 export default function EventsSection() {
@@ -16,7 +16,6 @@ export default function EventsSection() {
       className="relative py-14 px-6 overflow-x-clip"
       style={{ background: 'linear-gradient(160deg, #EAE2D8 0%, #F7F3EE 100%)' }}
     >
-      <TornEdge position="top" color="#EAE2D8" />
       <WatercolorWash />
       <FloralBackdrop opacity={0.06} />
 

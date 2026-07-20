@@ -242,52 +242,42 @@ export function OrnateDivider({ className = '', color = '#D8B36A' }: { className
 
 // ── Torn Paper Edge ────────────────────────────────────────────
 // Deterministic jagged deckle edge (no Math.random → SSR-safe)
-function tornPath(w: number, h: number, position: 'top' | 'bottom') {
-  const seg = 60;
-  const step = w / seg;
-  const pts: [number, number][] = [];
-  for (let i = 0; i <= seg; i++) {
-    const x = i * step;
-    // deterministic pseudo-noise 0..1
-    const n = Math.abs((Math.sin(i * 12.9898 + 4.123) * 43758.5453) % 1);
-    const n2 = Math.abs((Math.sin(i * 7.233 + 1.7) * 23421.631) % 1);
-    const off = (n * 0.7 + n2 * 0.3) * h;
-    pts.push([x, off]);
-  }
-  if (position === 'top') {
-    let d = `M0,${h} `;
-    pts.forEach(([x, off]) => { d += `L${x.toFixed(1)},${off.toFixed(1)} `; });
-    d += `L${w},${h} Z`;
-    return d;
-  }
-  let d = `M0,0 `;
-  pts.forEach(([x, off]) => { d += `L${x.toFixed(1)},${(h - off).toFixed(1)} `; });
-  d += `L${w},0 Z`;
-  return d;
+// Smooth colour blend strip placed *between* two sections in normal flow,
+// so it never washes over section content. Fades from one section's edge
+// colour to the next for a seamless, elegant merge.
+export function Blend({ from, to, height = 120 }: { from: string; to: string; height?: number }) {
+  return (
+    <div
+      className="w-full"
+      style={{ height, background: `linear-gradient(to bottom, ${from}, ${to})` }}
+      aria-hidden
+    />
+  );
 }
 
+// Soft gradient divider (replaces the old jagged torn-paper edge).
+// It feathers the section's colour into the neighbouring section for a
+// smooth, elegant transition instead of a hard choppy line.
 export function TornEdge({
   color = '#FAF7F2',
   position = 'top',
-  height = 26,
+  height = 130,
   className = '',
 }: { color?: string; position?: 'top' | 'bottom'; height?: number; className?: string }) {
-  const w = 1200;
-  const d = tornPath(w, height, position);
+  const gradient =
+    position === 'top'
+      ? `linear-gradient(to bottom, transparent, ${color})`
+      : `linear-gradient(to top, transparent, ${color})`;
   const posStyle: React.CSSProperties =
     position === 'top'
-      ? { top: 0, transform: 'translateY(-99%)' }
-      : { bottom: 0, transform: 'translateY(99%)' };
+      ? { top: 0, transform: 'translateY(-100%)' }
+      : { bottom: 0, transform: 'translateY(100%)' };
   return (
-    <svg
+    <div
       className={`absolute left-0 w-full pointer-events-none ${className}`}
-      style={{ height, zIndex: 6, ...posStyle, filter: 'drop-shadow(0 2px 3px rgba(92,17,30,0.08))' }}
-      viewBox={`0 0 ${w} ${height}`}
-      preserveAspectRatio="none"
+      style={{ height, zIndex: 6, background: gradient, ...posStyle }}
       aria-hidden
-    >
-      <path d={d} fill={color} />
-    </svg>
+    />
   );
 }
 

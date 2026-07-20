@@ -3,7 +3,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { useLang } from '@/context/LanguageContext';
-import { OrnateDivider, TornEdge, WatercolorWash, FloralBackdrop } from '@/components/ui/WatercolorIllustrations';
+import { OrnateDivider, WatercolorWash, FloralBackdrop } from '@/components/ui/WatercolorIllustrations';
 
 export default function DateLocationSection() {
   const { t } = useLang();
@@ -13,9 +13,8 @@ export default function DateLocationSection() {
     <section
       id="details"
       className="relative py-14 px-6 overflow-x-clip"
-      style={{ background: 'linear-gradient(180deg, #FFFFFF 0%, #FAF7F2 100%)' }}
+      style={{ background: 'linear-gradient(180deg, #FAF7F2 0%, #F3ECE3 100%)' }}
     >
-      <TornEdge position="top" color="#FFFFFF" />
       <WatercolorWash />
       <FloralBackdrop opacity={0.07} />
 
@@ -31,19 +30,13 @@ export default function DateLocationSection() {
           <OrnateDivider />
 
           <div className="grid sm:grid-cols-3 gap-8 mt-8 max-w-3xl mx-auto">
-            <div className="flex flex-col items-center gap-2">
-              <p className="caps-label" style={{ fontSize: '0.75rem' }}>{dl.dateLabel}</p>
-              <div className="h-px w-8" style={{ background: '#D8B36A' }} />
+            <div className="flex flex-col items-center">
               <p className="font-body" style={{ fontSize: '1.3rem', color: '#5C111E' }}>{dl.dateValue}</p>
             </div>
-            <div className="flex flex-col items-center gap-2">
-              <p className="caps-label" style={{ fontSize: '0.75rem' }}>{dl.ceremonyLabel}</p>
-              <div className="h-px w-8" style={{ background: '#D8B36A' }} />
+            <div className="flex flex-col items-center">
               <p className="font-body" style={{ fontSize: '1.3rem', color: '#5C111E' }}>{dl.ceremonyValue}</p>
             </div>
-            <div className="flex flex-col items-center gap-2">
-              <p className="caps-label" style={{ fontSize: '0.75rem' }}>{dl.venueLabel}</p>
-              <div className="h-px w-8" style={{ background: '#D8B36A' }} />
+            <div className="flex flex-col items-center">
               <p className="font-body" style={{ fontSize: '1.3rem', color: '#5C111E' }}>{dl.venueValue}</p>
             </div>
           </div>

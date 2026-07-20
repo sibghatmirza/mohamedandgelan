@@ -23,7 +23,7 @@ export const translations = {
     hero: {
       coupleNames: 'Mohamed AlSaba & Gelan Badr',
       weddingDate: 'September 30, 2026',
-      location: 'Al-Ali Al-Azeem Mosque · Heliopolis, Cairo',
+      location: 'Al Aly Al Azeem Mosque · Heliopolis, Cairo',
       rsvpBtn: 'RSVP Now',
       detailsBtn: 'View Details',
       scroll: 'Scroll to discover',
@@ -43,7 +43,7 @@ export const translations = {
       date: 'Wednesday, the thirtieth of September',
       year: 'Two Thousand and Twenty-Six',
       time: 'from five until eight in the evening',
-      venue: 'Al-Ali Al-Azeem Mosque · Heliopolis, Cairo',
+      venue: 'Al Aly Al Azeem Mosque · Heliopolis, Cairo',
     },
     card: {
       bismillah: 'In the name of God, the Most Gracious, the Most Merciful',
@@ -52,18 +52,18 @@ export const translations = {
       body2: 'Your presence will make this joyous day even more meaningful.',
       dateLine: 'Date: 30.09.2026',
       timeLine: 'Time: 5 PM – 8 PM',
-      venueLine: 'Venue: Al Ali Al Azeem Mosque, Cairo, Egypt',
+      venueLine: 'Venue: Al Aly Al Azeem Mosque, Cairo, Egypt',
     },
     dateLocation: {
       bandTop: 'The',
       bandTitle: 'Details',
       title: 'Date & Location',
       dateLabel: 'The Date',
-      dateValue: '09 · 30 · 2026',
+      dateValue: '09 / 30 / 2026',
       ceremonyLabel: 'The Ceremony',
       ceremonyValue: '5:00 – 8:00 in the evening',
       venueLabel: 'The Venue',
-      venueValue: 'Al-Ali Al-Azeem Mosque, Heliopolis',
+      venueValue: 'Al Aly Al Azeem Mosque, Heliopolis',
     },
     timeline: {
       title: 'Our Timeline',
@@ -131,7 +131,7 @@ export const translations = {
     },
     events: {
       title: 'Agenda',
-      subtitle: 'Every Beautiful Moment',
+      subtitle: 'Where Our Journey Continues',
       items: [
         { name: 'Guest Seating',        time: '5:00 PM', icon: 'chair' },
         { name: 'Khateb & Katb Al-Kitab', time: '5:30 PM', icon: 'rings' },
@@ -141,7 +141,7 @@ export const translations = {
     venue: {
       title: 'The Venue',
       subtitle: 'Where Our Story Continues',
-      name: 'Al-Ali Al-Azeem Mosque',
+      name: 'Al Aly Al Azeem Mosque',
       address: 'Almazah, Heliopolis, Cairo Governorate, Egypt',
       phone: '',
       directions: 'Get Directions',
@@ -179,6 +179,7 @@ export const translations = {
       understand: 'We Understand',
       success: 'Thank you! We look forward to celebrating with you.',
       successDecline: 'We are sorry you cannot join us. Thank you for letting us know.',
+      thankYouNote: 'Thank you for celebrating this special moment with us. We look forward to sharing our joy with you.',
       dietaryOptions: ['None', 'Vegetarian', 'Vegan', 'Halal', 'Gluten-Free', 'Other'],
     },
     gallery: {
@@ -236,7 +237,7 @@ export const translations = {
       contact: 'تواصل معنا',
     },
     hero: {
-      coupleNames: 'محمد الصبا وجيلان بدر',
+      coupleNames: 'محمد السبع وجيلان بدر',
       weddingDate: '٣٠ سبتمبر ٢٠٢٦',
       location: 'مسجد العلي العظيم · مصر الجديدة، القاهرة',
       rsvpBtn: 'تأكيد الحضور',
@@ -254,7 +255,7 @@ export const translations = {
       at: 'حفل زفافهما المبارك',
       ampersand: 'و',
       bride: 'جيلان بدر',
-      groom: 'محمد الصبا',
+      groom: 'محمد السبع',
       date: 'الأربعاء، الثلاثون من سبتمبر',
       year: 'عام ألفين وستة وعشرين',
       time: 'من الخامسة حتى الثامنة مساءً',
@@ -262,9 +263,9 @@ export const translations = {
     },
     card: {
       bismillah: 'بسم الله الرحمن الرحيم',
-      ceremony: 'يتشرفان بدعوتكم لحضور حفل عقد القران',
-      body1: 'نتطلع لمشاركتكم وعائلاتكم هذه المناسبة الخاصة ونحن نحتفل بهذا الاقتران المبارك.',
-      body2: 'حضوركم سيجعل هذا اليوم السعيد أكثر معنى.',
+      ceremony: '',
+      body1: 'يشرفان بدعوتكم لحضور حفل عقد القران، ويتطلعان لمشاركتكم وعائلاتكم هذه المناسبة الخاصة، ونحن نحتفل بهذا الاقتران المبارك. حضوركم سيجعل هذا اليوم السعيد أكثر معنى.',
+      body2: '',
       dateLine: 'التاريخ: ٣٠ / ٠٩ / ٢٠٢٦',
       timeLine: 'الوقت: من ٥ حتى ٨ مساءً',
       venueLine: 'المكان: مسجد العلي العظيم، القاهرة، مصر',
@@ -274,7 +275,7 @@ export const translations = {
       bandTitle: 'التفاصيل',
       title: 'التاريخ والمكان',
       dateLabel: 'التاريخ',
-      dateValue: '٣٠ · ٠٩ · ٢٠٢٦',
+      dateValue: '٣٠ / ٠٩ / ٢٠٢٦',
       ceremonyLabel: 'المراسم',
       ceremonyValue: 'من الخامسة حتى الثامنة مساءً',
       venueLabel: 'المكان',
@@ -346,9 +347,9 @@ export const translations = {
     },
     events: {
       title: 'برنامج الحفل',
-      subtitle: 'كل لحظة جميلة',
+      subtitle: 'حيث تستمر رحلتنا',
       items: [
-        { name: 'جلوس الضيوف',          time: '٥:٠٠ م', icon: 'chair' },
+        { name: 'استقبال الضيوف',        time: '٥:٠٠ م', icon: 'chair' },
         { name: 'الخطبة وكتب الكتاب',   time: '٥:٣٠ م', icon: 'rings' },
         { name: 'العشاء',               time: '٧:٠٠ م', icon: 'plate' },
       ],
@@ -394,6 +395,7 @@ export const translations = {
       understand: 'نتفهم ذلك',
       success: 'شكراً لك! نتطلع للاحتفال معك.',
       successDecline: 'نأسف لعدم تمكنك من الحضور. شكراً لإخبارنا.',
+      thankYouNote: 'شكراً لمشاركتكم هذه اللحظة المميزة معنا. نتطلّع لمشاركة فرحتنا معكم.',
       dietaryOptions: ['لا يوجد', 'نباتي', 'نباتي صارم', 'حلال', 'خالٍ من الغلوتين', 'أخرى'],
     },
     gallery: {
@@ -427,7 +429,7 @@ export const translations = {
     },
     footer: {
       madeWith: 'صُنع بكل حب',
-      names: 'محمد الصبا وجيلان بدر',
+      names: 'محمد السبع وجيلان بدر',
       date: '٣٠ سبتمبر ٢٠٢٦',
     },
     music: {

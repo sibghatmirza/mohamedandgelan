@@ -3,7 +3,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { useLang } from '@/context/LanguageContext';
-import { Monogram, WatercolorDivider, TornEdge } from '@/components/ui/WatercolorIllustrations';
+import { Monogram, WatercolorDivider } from '@/components/ui/WatercolorIllustrations';
 
 export default function FooterSection() {
   const { t } = useLang();
@@ -13,7 +13,6 @@ export default function FooterSection() {
       className="relative py-14 px-6 text-center overflow-x-clip"
       style={{ background: '#FAF7F2' }}
     >
-      <TornEdge position="top" color="#FAF7F2" />
 
 
       <motion.div
@@ -27,6 +26,15 @@ export default function FooterSection() {
         <h2 style={{ fontFamily: 'var(--font-heading)', fontSize: '2.5rem', color: '#5C111E' }}>
           {t.footer.names}
         </h2>
+
+        {/* Thank-you note, below the names */}
+        <p
+          className="mx-auto"
+          style={{ fontFamily: 'var(--font-body)', fontSize: 'clamp(0.95rem,2.4vw,1.1rem)', color: '#6b5e56', lineHeight: 1.7, maxWidth: 460, fontStyle: 'italic' }}
+        >
+          {t.rsvp.thankYouNote}
+        </p>
+
         <WatercolorDivider />
         <p className="section-subtitle">{t.footer.date}</p>
 

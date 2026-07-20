@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useForm } from 'react-hook-form';
 import { useLang } from '@/context/LanguageContext';
-import { WatercolorDivider, TornEdge, Monogram } from '@/components/ui/WatercolorIllustrations';
+import { WatercolorDivider, Monogram } from '@/components/ui/WatercolorIllustrations';
 
 type FormValues = {
   name: string;
@@ -65,7 +65,6 @@ export default function RSVPSection() {
       className="relative py-14 px-6 overflow-x-clip"
       style={{ background: 'linear-gradient(160deg, #5C111E 0%, #3a0b14 50%, #5C111E 100%)' }}
     >
-      <TornEdge position="top" color="#5C111E" />
 
 
       <div className="max-w-xl mx-auto relative z-10">
