@@ -80,7 +80,7 @@ export default function RSVPSection() {
           <p className="section-subtitle mb-4" style={{ color: '#D8B36A' }}>{t.rsvp.subtitle}</p>
           <h2 className="section-title" style={{ color: '#FAF7F2' }}>{t.rsvp.title}</h2>
           <WatercolorDivider />
-          <p style={{ fontFamily: 'var(--font-body)', color: '#A99F95', fontSize: '0.9rem', letterSpacing: '0.1em' }}>
+          <p style={{ fontFamily: 'var(--font-body)', color: '#A99F95', fontSize: '0.9rem', letterSpacing: t.dir === 'rtl' ? 'normal' : '0.1em' }}>
             {t.rsvp.deadline}
           </p>
         </motion.div>

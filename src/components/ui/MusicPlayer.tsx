@@ -60,18 +60,18 @@ export default function MusicPlayer({
     //    require a gesture before audio may play). Removes itself once fired.
     const onGesture = () => {
       start();
-      ['pointerdown', 'keydown', 'touchstart', 'scroll'].forEach((e) =>
+      ['pointerdown', 'keydown', 'touchstart', 'scroll', 'mousemove'].forEach((e) =>
         window.removeEventListener(e, onGesture),
       );
     };
-    ['pointerdown', 'keydown', 'touchstart', 'scroll'].forEach((e) =>
+    ['pointerdown', 'keydown', 'touchstart', 'scroll', 'mousemove'].forEach((e) =>
       window.addEventListener(e, onGesture, { passive: true }),
     );
 
     const audioEl = audioRef.current;
     return () => {
       window.removeEventListener('wedding:start-music', start);
-      ['pointerdown', 'keydown', 'touchstart', 'scroll'].forEach((e) =>
+      ['pointerdown', 'keydown', 'touchstart', 'scroll', 'mousemove'].forEach((e) =>
         window.removeEventListener(e, onGesture),
       );
       audioEl?.removeEventListener('loadedmetadata', onMeta);

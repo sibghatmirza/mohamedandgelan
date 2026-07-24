@@ -160,10 +160,16 @@ export function Monogram({ className = '', size = 80, color = 'gold' }: { classN
   const { t } = useLang();
   const suffix = color === 'burgundy' ? '-burgundy' : color === 'ivory' ? '-ivory' : '';
   const src = t.dir === 'rtl' ? `/images/monogram-ar${suffix}.svg` : `/images/monogram-en${suffix}.svg`;
+  // Dilation filter: stacked same-colour drop-shadows thicken the thin strokes
+  // so the monogram reads as bolder and stays legible.
+  const dilate = color === 'gold' ? '#B8912F' : color === 'burgundy' ? '#5C111E' : '#F2EDE4';
+  const bold =
+    `drop-shadow(0.7px 0 0 ${dilate}) drop-shadow(-0.7px 0 0 ${dilate}) ` +
+    `drop-shadow(0 0.7px 0 ${dilate}) drop-shadow(0 -0.7px 0 ${dilate})`;
   return (
     // eslint-disable-next-line @next/next/no-img-element
     <img src={src} alt="Monogram" className={`select-none ${className}`}
-      style={{ height: size, width: 'auto' }} />
+      style={{ height: size, width: 'auto', filter: bold }} />
   );
 }
 

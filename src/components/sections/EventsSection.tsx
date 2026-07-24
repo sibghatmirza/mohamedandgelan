@@ -66,7 +66,7 @@ export default function EventsSection() {
                     {Icon && <Icon size={40} />}
                   </motion.div>
 
-                  <p className="font-body" style={{ fontSize: '1.05rem', letterSpacing: '0.15em', color: '#D8B36A' }}>
+                  <p className="font-body" style={{ fontSize: '1.05rem', letterSpacing: t.dir === 'rtl' ? 'normal' : '0.15em', color: '#D8B36A' }}>
                     {ev.time}
                   </p>
                   <h3 style={{ fontFamily: 'var(--font-body)', fontSize: '1.4rem', color: '#5C111E' }}>

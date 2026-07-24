@@ -256,7 +256,7 @@ body[dir="rtl"] {
 
 [dir="rtl"] .section-subtitle {
   font-family: var(--font-ar);
-  letter-spacing: 0.1em;
+  letter-spacing: normal;
 }
 
 /* Refined caps label (like reference DATE / CEREMONY) */

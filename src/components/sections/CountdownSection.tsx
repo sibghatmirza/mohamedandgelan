@@ -39,7 +39,7 @@ export default function CountdownSection() {
         viewport={{ once: true }}
         transition={{ duration: 0.8 }}
       >
-        <p className="caps-label" style={{ fontSize: 'clamp(0.75rem,2.6vw,1.05rem)', color: '#D8B36A', letterSpacing: '0.3em' }}>
+        <p className="caps-label" style={{ fontSize: t.dir === 'rtl' ? 'clamp(1.4rem,5vw,2rem)' : 'clamp(0.75rem,2.6vw,1.05rem)', color: '#D8B36A', letterSpacing: t.dir === 'rtl' ? 'normal' : '0.3em' }}>
           {t.countdown.title}
         </p>
         {/* gold divider */}
@@ -68,7 +68,7 @@ export default function CountdownSection() {
                     {pad(val as number)}
                   </motion.span>
                 </div>
-                <span className="caps-label" style={{ fontSize: 'clamp(0.55rem,1.9vw,0.85rem)', color: '#E3DAD2', letterSpacing: '0.22em' }}>{label as string}</span>
+                <span className="caps-label" style={{ fontSize: 'clamp(0.6rem,1.9vw,0.85rem)', color: '#E3DAD2', letterSpacing: t.dir === 'rtl' ? 'normal' : '0.22em' }}>{label as string}</span>
               </div>
             </React.Fragment>
           ))}

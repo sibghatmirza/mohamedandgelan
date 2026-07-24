@@ -30,6 +30,7 @@ export const translations = {
     },
     invitation: {
       youAreInvited: 'You are invited',
+      saveTheDate: 'Save the Date',
       withLove: 'With love',
       us: 'Us',
       forever: 'Forever',
@@ -201,8 +202,8 @@ export const translations = {
       reference: 'Quran 7:189',
     },
     cruise: {
-      heroSubtitle: 'Where the celebration continues',
-      heroTitle: 'Shebo Nile Cruise',
+      heroSubtitle: 'Where the Party Continues',
+      heroTitle: 'Shemu Nile Cruise',
       boardingTimeLabel: 'Boarding Time',
       boardingTime: '9:30 PM',
       boardingLabel: 'Boarding Location',
@@ -237,7 +238,7 @@ export const translations = {
       contact: 'تواصل معنا',
     },
     hero: {
-      coupleNames: 'محمد السبع وجيلان بدر',
+      coupleNames: 'محمد السبع & جيلان بدر',
       weddingDate: '٣٠ سبتمبر ٢٠٢٦',
       location: 'مسجد العلي العظيم · مصر الجديدة، القاهرة',
       rsvpBtn: 'تأكيد الحضور',
@@ -246,6 +247,7 @@ export const translations = {
     },
     invitation: {
       youAreInvited: 'أنتم مدعوون',
+      saveTheDate: 'احفظوا الموعد',
       withLove: 'مع كل الحب',
       us: 'نحن',
       forever: 'إلى الأبد',
@@ -253,7 +255,7 @@ export const translations = {
       together: 'مع عائلتيهما',
       request: 'يتشرفان بدعوتكم لحضور',
       at: 'حفل زفافهما المبارك',
-      ampersand: 'و',
+      ampersand: '&',
       bride: 'جيلان بدر',
       groom: 'محمد السبع',
       date: 'الأربعاء، الثلاثون من سبتمبر',
@@ -312,7 +314,7 @@ export const translations = {
       message: 'مع عائلتيهما، يدعوانكم بكل فرح للاحتفال بزواجهما المبارك.',
     },
     countdown: {
-      title: 'قبل اليوم العظيم',
+      title: 'موعدنا',
       days: 'يوم',
       hours: 'ساعة',
       minutes: 'دقيقة',
@@ -417,8 +419,8 @@ export const translations = {
       reference: 'سورة الأعراف · ١٨٩',
     },
     cruise: {
-      heroSubtitle: 'حيث يستمر الاحتفال',
-      heroTitle: 'رحلة شيبو النيلية',
+      heroSubtitle: 'حيث تستمر السهرة',
+      heroTitle: 'رحلة شيمو النيلية',
       boardingTimeLabel: 'موعد الركوب',
       boardingTime: '٩:٣٠ مساءً',
       boardingLabel: 'مكان الركوب',
@@ -429,7 +431,7 @@ export const translations = {
     },
     footer: {
       madeWith: 'صُنع بكل حب',
-      names: 'محمد السبع وجيلان بدر',
+      names: 'محمد السبع & جيلان بدر',
       date: '٣٠ سبتمبر ٢٠٢٦',
     },
     music: {

@@ -26,7 +26,6 @@ export default function VenueSection() {
           viewport={{ once: true }}
           transition={{ duration: 0.8 }}
         >
-          <p className="section-subtitle mb-4">{t.venue.subtitle}</p>
           <h2 className="section-title">{t.venue.title}</h2>
           <WatercolorDivider />
         </motion.div>

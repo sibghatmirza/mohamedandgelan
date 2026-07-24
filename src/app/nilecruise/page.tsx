@@ -96,7 +96,20 @@ export default function NileCruisePage() {
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
           >
-            <p className="section-subtitle mb-4">{cr.heroSubtitle}</p>
+            <p className="mb-4">
+              <span
+                className="section-subtitle"
+                style={{
+                  background: 'linear-gradient(120deg, rgba(216,179,106,0.28), rgba(216,179,106,0.14))',
+                  color: '#8a6d4a',
+                  padding: '0.35em 0.9em',
+                  borderRadius: '999px',
+                  display: 'inline-block',
+                }}
+              >
+                {cr.heroSubtitle}
+              </span>
+            </p>
             <h1 className="section-title">{cr.heroTitle}</h1>
             <WatercolorDivider />
           </motion.div>

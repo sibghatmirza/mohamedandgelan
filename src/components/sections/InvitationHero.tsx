@@ -85,7 +85,7 @@ export default function InvitationHero() {
         <motion.p
           {...rise}
           transition={{ duration: 0.8, delay: 0.4 }}
-          className={t.dir === 'rtl' ? 'font-arabic' : 'font-script'}
+          className="font-script"
           style={{ fontSize: 'clamp(2rem, 6.5vw, 3rem)', color: GOLD, lineHeight: 1, margin: '0.1em 0' }}
         >
           {inv.ampersand}
