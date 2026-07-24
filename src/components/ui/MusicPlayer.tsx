@@ -50,10 +50,20 @@ export default function MusicPlayer({
     audioRef.current?.addEventListener('loadedmetadata', onMeta);
     audioRef.current?.addEventListener('ended', onEnded);
 
-    // 0) try to autoplay immediately (works where the browser allows it)
+    // 0) try to autoplay immediately, and keep retrying for the first few
+    //    seconds so it begins the instant the browser allows — i.e. right as
+    //    the banner video starts, not only after it ends.
     start();
+    const retry = setInterval(() => {
+      if (seededRef.current || !audioRef.current?.paused) {
+        clearInterval(retry);
+        return;
+      }
+      start();
+    }, 400);
+    setTimeout(() => clearInterval(retry), 12000);
 
-    // 1) fired when the intro video finishes
+    // 1) also fired by the intro video (start + finish)
     window.addEventListener('wedding:start-music', start);
 
     // 2) fallback: start on the very first real user interaction (browsers
@@ -70,6 +80,7 @@ export default function MusicPlayer({
 
     const audioEl = audioRef.current;
     return () => {
+      clearInterval(retry);
       window.removeEventListener('wedding:start-music', start);
       ['pointerdown', 'keydown', 'touchstart', 'scroll', 'mousemove'].forEach((e) =>
         window.removeEventListener(e, onGesture),
