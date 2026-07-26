@@ -28,7 +28,7 @@ export default function DateLocationSection() {
           <h2 className="section-title">{dl.title}</h2>
           <OrnateDivider />
 
-          <div className="grid sm:grid-cols-3 gap-8 mt-10 max-w-3xl mx-auto">
+          <div className="flex flex-col items-center gap-10 mt-10 max-w-3xl mx-auto">
             <div className="flex flex-col items-center gap-3">
               <p className="caps-label" style={{ fontSize: '0.75rem' }}>{dl.dateLabel}</p>
               <div className="h-px w-8" style={{ background: '#D8B36A' }} />

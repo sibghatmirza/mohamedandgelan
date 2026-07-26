@@ -73,31 +73,44 @@ export default function InvitationHero() {
           </motion.p>
         )}
 
-        {/* full names */}
-        <motion.h1
-          {...rise}
-          transition={{ duration: 0.8, delay: 0.35 }}
-          className="font-script mt-4"
-          style={{ fontSize: 'clamp(3.4rem, 13vw, 6rem)', color: BURGUNDY, lineHeight: 1 }}
-        >
-          {inv.groom}
-        </motion.h1>
-        <motion.p
-          {...rise}
-          transition={{ duration: 0.8, delay: 0.4 }}
-          className="font-script"
-          style={{ fontSize: 'clamp(2rem, 6.5vw, 3rem)', color: GOLD, lineHeight: 1, margin: '0.1em 0' }}
-        >
-          {inv.ampersand}
-        </motion.p>
-        <motion.h1
-          {...rise}
-          transition={{ duration: 0.8, delay: 0.45 }}
-          className="font-script"
-          style={{ fontSize: 'clamp(3.4rem, 13vw, 6rem)', color: BURGUNDY, lineHeight: 1 }}
-        >
-          {inv.bride}
-        </motion.h1>
+        {/* full names — Arabic uses the custom calligraphy SVG, English uses type */}
+        {t.dir === 'rtl' ? (
+          <motion.img
+            {...rise}
+            transition={{ duration: 0.9, delay: 0.35 }}
+            src="/images/names.svg"
+            alt={`${inv.groom} & ${inv.bride}`}
+            className="mt-4 w-full mx-auto"
+            style={{ maxWidth: 'min(88%, 560px)', height: 'auto' }}
+          />
+        ) : (
+          <>
+            <motion.h1
+              {...rise}
+              transition={{ duration: 0.8, delay: 0.35 }}
+              className="font-script mt-4"
+              style={{ fontSize: 'clamp(3.4rem, 13vw, 6rem)', color: BURGUNDY, lineHeight: 1 }}
+            >
+              {inv.groom}
+            </motion.h1>
+            <motion.p
+              {...rise}
+              transition={{ duration: 0.8, delay: 0.4 }}
+              className="font-script"
+              style={{ fontSize: 'clamp(2rem, 6.5vw, 3rem)', color: GOLD, lineHeight: 1, margin: '0.1em 0' }}
+            >
+              {inv.ampersand}
+            </motion.p>
+            <motion.h1
+              {...rise}
+              transition={{ duration: 0.8, delay: 0.45 }}
+              className="font-script"
+              style={{ fontSize: 'clamp(3.4rem, 13vw, 6rem)', color: BURGUNDY, lineHeight: 1 }}
+            >
+              {inv.bride}
+            </motion.h1>
+          </>
+        )}
 
         {/* body — both sentences in one compact block */}
         <motion.p

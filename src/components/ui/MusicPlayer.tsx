@@ -50,39 +50,25 @@ export default function MusicPlayer({
     audioRef.current?.addEventListener('loadedmetadata', onMeta);
     audioRef.current?.addEventListener('ended', onEnded);
 
-    // 0) try to autoplay immediately, and keep retrying for the first few
-    //    seconds so it begins the instant the browser allows — i.e. right as
-    //    the banner video starts, not only after it ends.
-    start();
-    const retry = setInterval(() => {
-      if (seededRef.current || !audioRef.current?.paused) {
-        clearInterval(retry);
-        return;
-      }
-      start();
-    }, 400);
-    setTimeout(() => clearInterval(retry), 12000);
-
-    // 1) also fired by the intro video (start + finish)
+    // Music begins when the intro video ends (VideoIntro fires this on finish).
     window.addEventListener('wedding:start-music', start);
 
-    // 2) fallback: start on the very first real user interaction (browsers
-    //    require a gesture before audio may play). Removes itself once fired.
+    // 2) fallback: if the browser blocked the play() at the video's end,
+    //    start on the first real user interaction after that.
     const onGesture = () => {
       start();
-      ['pointerdown', 'keydown', 'touchstart', 'scroll', 'mousemove'].forEach((e) =>
+      ['pointerdown', 'keydown', 'touchstart', 'scroll'].forEach((e) =>
         window.removeEventListener(e, onGesture),
       );
     };
-    ['pointerdown', 'keydown', 'touchstart', 'scroll', 'mousemove'].forEach((e) =>
+    ['pointerdown', 'keydown', 'touchstart', 'scroll'].forEach((e) =>
       window.addEventListener(e, onGesture, { passive: true }),
     );
 
     const audioEl = audioRef.current;
     return () => {
-      clearInterval(retry);
       window.removeEventListener('wedding:start-music', start);
-      ['pointerdown', 'keydown', 'touchstart', 'scroll', 'mousemove'].forEach((e) =>
+      ['pointerdown', 'keydown', 'touchstart', 'scroll'].forEach((e) =>
         window.removeEventListener(e, onGesture),
       );
       audioEl?.removeEventListener('loadedmetadata', onMeta);

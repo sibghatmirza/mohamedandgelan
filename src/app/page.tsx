@@ -35,7 +35,7 @@ export default function Home() {
       {/* 7 — RSVP */}
       <RSVPSection />
       <FooterSection />
-      <MusicPlayer src="/music/enta-omry.mp3" startAt={56} />
+      <MusicPlayer src="/music/enta-omry.mp3" startAt={73} />
     </main>
   );
 }

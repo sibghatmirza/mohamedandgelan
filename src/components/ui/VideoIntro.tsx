@@ -6,12 +6,14 @@ import { useLang } from '@/context/LanguageContext';
 
 // Cream matches the invitation background so the hand-off is light-to-light.
 const CREAM = '#F7EFE8';
+const GOLD = '#E4C579';
 
 export default function VideoIntro() {
   const { t } = useLang();
   const videoRef = useRef<HTMLVideoElement>(null);
-  const [ending, setEnding] = useState(false); // cream veil dissolving in
-  const [gone, setGone] = useState(false);     // overlay removed
+  const [ending, setEnding] = useState(false);   // cream veil dissolving in
+  const [gone, setGone] = useState(false);       // overlay removed
+  const [stdVisible, setStdVisible] = useState(true); // Save the Date shown
 
   // lock scroll while the intro plays
   useEffect(() => {
@@ -26,8 +28,8 @@ export default function VideoIntro() {
 
   const finish = () => {
     if (ending) return;
+    // start the background music as the video ends
     window.dispatchEvent(new Event('wedding:start-music'));
-    // 1) dissolve the video into a cream veil, then 2) reveal the invite under it
     setEnding(true);
     setTimeout(() => setGone(true), 950);
   };
@@ -36,11 +38,11 @@ export default function VideoIntro() {
     const v = videoRef.current;
     if (!v) return;
     v.play().catch(() => {});
-    // ask the music to start right away (as early as the browser allows)
-    window.dispatchEvent(new Event('wedding:start-music'));
+    // hide "Save the Date" before the mosque scene comes into view
+    const hideStd = setTimeout(() => setStdVisible(false), 2600);
     // hard safety fallback in case 'ended' never fires
     const fallback = setTimeout(() => finish(), 32000);
-    return () => clearTimeout(fallback);
+    return () => { clearTimeout(hideStd); clearTimeout(fallback); };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -63,41 +65,42 @@ export default function VideoIntro() {
             className="w-full h-full object-cover"
           />
 
-          {/* soft scrim for text legibility */}
-          <div
-            className="absolute inset-0 pointer-events-none"
-            style={{ background: 'linear-gradient(to bottom, rgba(58,11,20,0.15) 0%, transparent 30%, transparent 55%, rgba(58,11,20,0.45) 100%)' }}
-          />
-
-          {/* Save the Date + date overlay */}
+          {/* Save the Date — centered, gold, fades out before the mosque appears */}
           <motion.div
-            className="absolute inset-x-0 flex flex-col items-center text-center px-6"
-            style={{ bottom: '11%' }}
+            className="absolute inset-0 flex flex-col items-center justify-center text-center px-6 pointer-events-none"
             dir={t.dir}
-            initial={{ opacity: 0, y: 24 }}
-            animate={{ opacity: ending ? 0 : 1, y: 0 }}
-            transition={{ duration: 1.1, delay: 0.5 }}
+            initial={{ opacity: 0, y: 12 }}
+            animate={{ opacity: stdVisible && !ending ? 1 : 0, y: 0 }}
+            transition={{ duration: 0.9, ease: 'easeInOut' }}
           >
-            <span
-              className="font-script"
+            {/* soft radial scrim just behind the text for legibility */}
+            <div
+              className="absolute pointer-events-none"
               style={{
-                fontSize: 'clamp(2.6rem, 9vw, 5rem)',
-                color: '#F7EFE8',
+                width: '120%', height: '60%',
+                background: 'radial-gradient(closest-side, rgba(58,11,20,0.35), transparent)',
+              }}
+            />
+            <span
+              className="font-script relative"
+              style={{
+                fontSize: 'clamp(2.8rem, 10vw, 5.5rem)',
+                color: GOLD,
                 lineHeight: 1,
-                textShadow: '0 3px 18px rgba(0,0,0,0.45)',
+                textShadow: '0 3px 20px rgba(0,0,0,0.5)',
               }}
             >
               {t.invitation.saveTheDate}
             </span>
             <span
-              className="mt-4"
+              className="mt-4 relative"
               style={{
                 fontFamily: 'var(--font-body)',
                 fontSize: 'clamp(0.85rem, 3vw, 1.15rem)',
-                letterSpacing: t.dir === 'rtl' ? '0.1em' : '0.32em',
+                letterSpacing: t.dir === 'rtl' ? 'normal' : '0.32em',
                 textTransform: t.dir === 'rtl' ? 'none' : 'uppercase',
-                color: '#F2E6C9',
-                textShadow: '0 2px 12px rgba(0,0,0,0.5)',
+                color: GOLD,
+                textShadow: '0 2px 14px rgba(0,0,0,0.55)',
               }}
             >
               {t.hero.weddingDate}

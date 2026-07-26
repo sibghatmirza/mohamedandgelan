@@ -23,11 +23,8 @@ export default function FooterSection() {
       >
 
         <Monogram size={72} />
-        <h2 style={{ fontFamily: 'var(--font-heading)', fontSize: '2.5rem', color: '#5C111E' }}>
-          {t.footer.names}
-        </h2>
 
-        {/* Thank-you note, below the names */}
+        {/* Thank-you note */}
         <p
           className="mx-auto"
           style={{ fontFamily: 'var(--font-body)', fontSize: 'clamp(0.95rem,2.4vw,1.1rem)', color: '#6b5e56', lineHeight: 1.7, maxWidth: 460, fontStyle: 'italic' }}
