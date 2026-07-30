@@ -11,68 +11,65 @@ export default function MusicPlayer({
   startAt = 0,
 }: {
   src?: string;
-  startAt?: number; // seconds to begin playback from (and loop back to)
+  startAt?: number; // seconds to begin audible playback from (and loop back to)
 }) {
   const { t } = useLang();
   const [playing, setPlaying] = useState(false);
   const audioRef = useRef<HTMLAudioElement>(null);
-  const seededRef = useRef(false);
+  const audibleRef = useRef(false); // has it gone audible yet?
 
   useEffect(() => {
-    const a = audioRef.current;
-    if (a) a.volume = VOLUME;
+    const el = audioRef.current;
+    if (!el) return;
 
-    const start = () => {
-      const el = audioRef.current;
-      if (!el) return;
-      el.volume = VOLUME;
-      // begin from the requested offset the first time we actually start
-      if (!seededRef.current && startAt > 0) {
-        try { el.currentTime = startAt; } catch { /* metadata not ready yet */ }
-      }
-      el.play().then(() => { seededRef.current = true; setPlaying(true); }).catch(() => {});
-    };
-
-    // if metadata isn't loaded yet, seek as soon as it is
-    const onMeta = () => {
-      const el = audioRef.current;
-      if (el && startAt > 0 && el.currentTime < startAt && !seededRef.current) {
-        try { el.currentTime = startAt; } catch { /* noop */ }
+    const seek = () => {
+      if (startAt > 0) {
+        try { el.currentTime = startAt; } catch { /* metadata not ready */ }
       }
     };
+
+    // Prime the element: muted autoplay is allowed on every browser, so the
+    // audio is already "playing" silently and ready to be unmuted instantly.
+    el.muted = true;
+    el.volume = VOLUME;
+    el.play().catch(() => {});
+
+    // Go audible: seek to the offset, unmute, ensure it's playing.
+    const goAudible = () => {
+      const a = audioRef.current;
+      if (!a) return;
+      if (!audibleRef.current) seek();
+      a.muted = false;
+      a.volume = VOLUME;
+      a.play()
+        .then(() => { audibleRef.current = true; setPlaying(true); })
+        .catch(() => {});
+    };
+
+    // seek once metadata is available
+    const onMeta = () => { if (!audibleRef.current) seek(); };
     // loop back to the offset instead of 0
-    const onEnded = () => {
-      const el = audioRef.current;
-      if (!el) return;
-      try { el.currentTime = startAt; } catch { /* noop */ }
-      el.play().catch(() => {});
-    };
-    audioRef.current?.addEventListener('loadedmetadata', onMeta);
-    audioRef.current?.addEventListener('ended', onEnded);
+    const onEnded = () => { seek(); el.play().catch(() => {}); };
+    el.addEventListener('loadedmetadata', onMeta);
+    el.addEventListener('ended', onEnded);
 
-    // Music begins when the intro video ends (VideoIntro fires this on finish).
-    window.addEventListener('wedding:start-music', start);
+    // 1) primary: the intro video fires this when it finishes
+    window.addEventListener('wedding:start-music', goAudible);
 
-    // 2) fallback: if the browser blocked the play() at the video's end,
-    //    start on the first real user interaction after that.
+    // 2) guaranteed fallback: the first user interaction anywhere unmutes it
+    //    (mobile browsers require a gesture before audible playback).
+    const gestures = ['pointerdown', 'touchstart', 'click', 'keydown', 'scroll'];
     const onGesture = () => {
-      start();
-      ['pointerdown', 'keydown', 'touchstart', 'scroll'].forEach((e) =>
-        window.removeEventListener(e, onGesture),
-      );
+      goAudible();
+      gestures.forEach((e) => window.removeEventListener(e, onGesture, true));
     };
-    ['pointerdown', 'keydown', 'touchstart', 'scroll'].forEach((e) =>
-      window.addEventListener(e, onGesture, { passive: true }),
-    );
+    gestures.forEach((e) => window.addEventListener(e, onGesture, true));
 
-    const audioEl = audioRef.current;
     return () => {
-      window.removeEventListener('wedding:start-music', start);
-      ['pointerdown', 'keydown', 'touchstart', 'scroll'].forEach((e) =>
-        window.removeEventListener(e, onGesture),
-      );
-      audioEl?.removeEventListener('loadedmetadata', onMeta);
-      audioEl?.removeEventListener('ended', onEnded);
+      window.removeEventListener('wedding:start-music', goAudible);
+      gestures.forEach((e) => window.removeEventListener(e, onGesture, true));
+      el.removeEventListener('loadedmetadata', onMeta);
+      el.removeEventListener('ended', onEnded);
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -80,7 +77,8 @@ export default function MusicPlayer({
   const toggle = () => {
     const a = audioRef.current;
     if (!a) return;
-    if (a.paused) {
+    if (a.paused || a.muted) {
+      a.muted = false;
       a.volume = VOLUME;
       a.play().then(() => setPlaying(true)).catch(() => {});
     } else {
@@ -91,8 +89,8 @@ export default function MusicPlayer({
 
   return (
     <>
-      {/* no native loop — we loop back to startAt manually via 'ended' */}
-      <audio ref={audioRef} src={src} preload="auto" />
+      {/* muted autoplay primes it; we unmute on video-end / first interaction */}
+      <audio ref={audioRef} src={src} preload="auto" autoPlay muted />
       <motion.button
         onClick={toggle}
         className="fixed bottom-6 right-6 z-40 w-12 h-12 rounded-full flex items-center justify-center shadow-lg"

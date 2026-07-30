@@ -65,7 +65,7 @@ export default function VideoIntro() {
             className="w-full h-full object-cover"
           />
 
-          {/* Save the Date — centered, gold, fades out before the mosque appears */}
+          {/* Save the Date — centered, gold, bold; fades out before the mosque appears */}
           <motion.div
             className="absolute inset-0 flex flex-col items-center justify-center text-center px-6 pointer-events-none"
             dir={t.dir}
@@ -73,34 +73,48 @@ export default function VideoIntro() {
             animate={{ opacity: stdVisible && !ending ? 1 : 0, y: 0 }}
             transition={{ duration: 0.9, ease: 'easeInOut' }}
           >
-            {/* soft radial scrim just behind the text for legibility */}
+            {/* stronger scrim behind the text for legibility on the video */}
             <div
               className="absolute pointer-events-none"
               style={{
-                width: '120%', height: '60%',
-                background: 'radial-gradient(closest-side, rgba(58,11,20,0.35), transparent)',
+                width: '135%', height: '72%',
+                background: 'radial-gradient(closest-side, rgba(50,9,17,0.55), rgba(50,9,17,0.22) 55%, transparent)',
               }}
             />
+
+            {t.dir === 'rtl' ? (
+              /* Arabic: custom calligraphy word */
+              <img
+                src="/images/banner-arabic-date.svg"
+                alt={t.invitation.saveTheDate}
+                className="relative"
+                style={{ width: 'min(78%, 620px)', height: 'auto', filter: 'drop-shadow(0 4px 22px rgba(0,0,0,0.55))' }}
+              />
+            ) : (
+              <span
+                className="font-script relative"
+                style={{
+                  fontSize: 'clamp(3.6rem, 13vw, 7rem)',
+                  color: GOLD,
+                  lineHeight: 1,
+                  textShadow: '0 2px 4px rgba(0,0,0,0.6), 0 4px 24px rgba(0,0,0,0.6)',
+                }}
+              >
+                {t.invitation.saveTheDate}
+              </span>
+            )}
+
             <span
-              className="font-script relative"
+              className="relative"
               style={{
-                fontSize: 'clamp(2.8rem, 10vw, 5.5rem)',
-                color: GOLD,
-                lineHeight: 1,
-                textShadow: '0 3px 20px rgba(0,0,0,0.5)',
-              }}
-            >
-              {t.invitation.saveTheDate}
-            </span>
-            <span
-              className="mt-4 relative"
-              style={{
+                marginTop: t.dir === 'rtl' ? '1.6rem' : '1.2rem',
                 fontFamily: 'var(--font-body)',
-                fontSize: 'clamp(0.85rem, 3vw, 1.15rem)',
-                letterSpacing: t.dir === 'rtl' ? 'normal' : '0.32em',
+                fontWeight: 600,
+                fontSize: t.dir === 'rtl' ? 'clamp(1.5rem, 5.5vw, 2.6rem)' : 'clamp(1.05rem, 3.6vw, 1.7rem)',
+                letterSpacing: t.dir === 'rtl' ? 'normal' : '0.3em',
                 textTransform: t.dir === 'rtl' ? 'none' : 'uppercase',
                 color: GOLD,
-                textShadow: '0 2px 14px rgba(0,0,0,0.55)',
+                textShadow: '0 2px 4px rgba(0,0,0,0.6), 0 3px 18px rgba(0,0,0,0.6)',
               }}
             >
               {t.hero.weddingDate}
