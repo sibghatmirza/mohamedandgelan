@@ -83,18 +83,18 @@ export default function VideoIntro() {
             />
 
             {t.dir === 'rtl' ? (
-              /* Arabic: custom calligraphy word */
+              /* Arabic: custom calligraphy word — big */
               <img
                 src="/images/banner-arabic-date.svg"
                 alt={t.invitation.saveTheDate}
                 className="relative"
-                style={{ width: 'min(78%, 620px)', height: 'auto', filter: 'drop-shadow(0 4px 22px rgba(0,0,0,0.55))' }}
+                style={{ width: 'min(86%, 720px)', height: 'auto', filter: 'drop-shadow(0 4px 22px rgba(0,0,0,0.55))' }}
               />
             ) : (
               <span
                 className="font-script relative"
                 style={{
-                  fontSize: 'clamp(3.6rem, 13vw, 7rem)',
+                  fontSize: 'clamp(4rem, 15vw, 8rem)',
                   color: GOLD,
                   lineHeight: 1,
                   textShadow: '0 2px 4px rgba(0,0,0,0.6), 0 4px 24px rgba(0,0,0,0.6)',
@@ -107,11 +107,11 @@ export default function VideoIntro() {
             <span
               className="relative"
               style={{
-                marginTop: t.dir === 'rtl' ? '1.6rem' : '1.2rem',
+                marginTop: t.dir === 'rtl' ? '1.8rem' : '1.4rem',
                 fontFamily: 'var(--font-body)',
                 fontWeight: 600,
-                fontSize: t.dir === 'rtl' ? 'clamp(1.5rem, 5.5vw, 2.6rem)' : 'clamp(1.05rem, 3.6vw, 1.7rem)',
-                letterSpacing: t.dir === 'rtl' ? 'normal' : '0.3em',
+                fontSize: t.dir === 'rtl' ? 'clamp(2rem, 7vw, 3.4rem)' : 'clamp(1.5rem, 5vw, 2.6rem)',
+                letterSpacing: t.dir === 'rtl' ? 'normal' : '0.28em',
                 textTransform: t.dir === 'rtl' ? 'none' : 'uppercase',
                 color: GOLD,
                 textShadow: '0 2px 4px rgba(0,0,0,0.6), 0 3px 18px rgba(0,0,0,0.6)',

@@ -29,6 +29,13 @@ export function LanguageProvider({ children }: { children: React.ReactNode }) {
   };
 
   useEffect(() => {
+    // A ?lang=ar / ?lang=en URL param wins (used for the separate EN/AR links).
+    const params = new URLSearchParams(window.location.search);
+    const urlLang = params.get('lang');
+    if (urlLang === 'ar' || urlLang === 'en') {
+      setLang(urlLang);
+      return;
+    }
     const saved = localStorage.getItem('wedding-lang') as Lang | null;
     if (saved && (saved === 'en' || saved === 'ar')) {
       setLang(saved);
