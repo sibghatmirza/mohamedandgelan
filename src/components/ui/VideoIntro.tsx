@@ -39,7 +39,7 @@ export default function VideoIntro() {
     if (!v) return;
     v.play().catch(() => {});
     // hide "Save the Date" before the mosque scene comes into view
-    const hideStd = setTimeout(() => setStdVisible(false), 2600);
+    const hideStd = setTimeout(() => setStdVisible(false), 4600);
     // hard safety fallback in case 'ended' never fires
     const fallback = setTimeout(() => finish(), 32000);
     return () => { clearTimeout(hideStd); clearTimeout(fallback); };
