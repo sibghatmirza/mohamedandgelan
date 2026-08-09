@@ -88,7 +88,7 @@ export default function VideoIntro() {
                 src="/images/banner-arabic-date.svg"
                 alt={t.invitation.saveTheDate}
                 className="relative"
-                style={{ width: 'min(86%, 720px)', height: 'auto', filter: 'drop-shadow(0 4px 22px rgba(0,0,0,0.55))' }}
+                style={{ width: 'min(68%, 560px)', height: 'auto', filter: 'drop-shadow(0 4px 22px rgba(0,0,0,0.55))' }}
               />
             ) : (
               <span
