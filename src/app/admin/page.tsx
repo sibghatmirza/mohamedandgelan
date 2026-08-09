@@ -3,6 +3,7 @@
 import React, { useCallback, useEffect, useState } from 'react';
 
 type Row = {
+  id: number;
   timestamp: string;
   name: string;
   phone: string;
@@ -23,6 +24,29 @@ export default function AdminPage() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const [filter, setFilter] = useState<'all' | 'yes' | 'no'>('all');
+  const [deletingId, setDeletingId] = useState<number | null>(null);
+
+  const remove = async (row: Row) => {
+    if (!window.confirm(`Delete the RSVP from "${row.name}"? This cannot be undone.`)) return;
+    setDeletingId(row.id);
+    try {
+      const res = await fetch('/api/admin/rsvps', {
+        method: 'DELETE',
+        headers: { 'x-admin-password': password, 'Content-Type': 'application/json' },
+        body: JSON.stringify({ id: row.id }),
+      });
+      const data = await res.json();
+      if (!res.ok || !data.ok) {
+        alert(data.error || 'Could not delete');
+        return;
+      }
+      setRows((prev) => prev.filter((r) => r.id !== row.id));
+    } catch {
+      alert('Could not reach the server');
+    } finally {
+      setDeletingId(null);
+    }
+  };
 
   const load = useCallback(async (pw: string) => {
     setLoading(true);
@@ -205,8 +229,8 @@ export default function AdminPage() {
           <table className="w-full text-left" style={{ fontFamily: 'var(--font-body)' }}>
             <thead>
               <tr style={{ borderBottom: `1px solid ${gold}` }}>
-                {['Date', 'Name', 'Phone', 'Guests', 'Guest Names', 'Event', 'Status'].map((h) => (
-                  <th key={h} className="px-4 py-3 text-[0.65rem] tracking-[0.2em] uppercase whitespace-nowrap"
+                {['Date', 'Name', 'Phone', 'Guests', 'Guest Names', 'Event', 'Status', ''].map((h, hi) => (
+                  <th key={hi} className="px-4 py-3 text-[0.65rem] tracking-[0.2em] uppercase whitespace-nowrap"
                     style={{ color: '#8a6d4a', fontFamily: 'var(--font-body)' }}>
                     {h}
                   </th>
@@ -216,13 +240,13 @@ export default function AdminPage() {
             <tbody>
               {visible.length === 0 && (
                 <tr>
-                  <td colSpan={7} className="px-4 py-10 text-center" style={{ color: '#A99F95', fontSize: '1.05rem' }}>
+                  <td colSpan={8} className="px-4 py-10 text-center" style={{ color: '#A99F95', fontSize: '1.05rem' }}>
                     No responses {filter !== 'all' ? 'in this category ' : ''}yet.
                   </td>
                 </tr>
               )}
-              {visible.map((r, i) => (
-                <tr key={i} style={{ borderBottom: '1px solid rgba(216,179,106,0.2)' }}>
+              {visible.map((r) => (
+                <tr key={r.id} style={{ borderBottom: '1px solid rgba(216,179,106,0.2)' }}>
                   <td className="px-4 py-3 whitespace-nowrap" style={{ color: '#6b5e56' }}>
                     {r.timestamp ? new Date(r.timestamp).toLocaleString(undefined, { dateStyle: 'medium', timeStyle: 'short' }) : '—'}
                   </td>
@@ -242,6 +266,28 @@ export default function AdminPage() {
                       }}>
                       {String(r.attending).toLowerCase() === 'yes' ? 'Accepted' : 'Declined'}
                     </span>
+                  </td>
+                  <td className="px-4 py-3 text-right">
+                    <button
+                      onClick={() => remove(r)}
+                      disabled={deletingId === r.id}
+                      title="Delete this RSVP"
+                      aria-label={`Delete RSVP from ${r.name}`}
+                      className="transition-opacity disabled:opacity-40"
+                      style={{
+                        fontFamily: 'var(--font-body)',
+                        fontSize: '0.7rem',
+                        letterSpacing: '0.12em',
+                        textTransform: 'uppercase',
+                        color: burgundy,
+                        border: `1px solid rgba(92,17,30,0.35)`,
+                        borderRadius: 4,
+                        padding: '0.3rem 0.7rem',
+                        whiteSpace: 'nowrap',
+                      }}
+                    >
+                      {deletingId === r.id ? '…' : 'Delete'}
+                    </button>
                   </td>
                 </tr>
               ))}

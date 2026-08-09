@@ -35,13 +35,14 @@ export async function GET(req: NextRequest) {
     `;
     await sql`ALTER TABLE rsvps ADD COLUMN IF NOT EXISTS event TEXT NOT NULL DEFAULT 'nikah'`;
     const rows = await sql`
-      SELECT created_at, name, phone, guests, guest_names, attending, event
+      SELECT id, created_at, name, phone, guests, guest_names, attending, event
       FROM rsvps
       ORDER BY created_at DESC
     `;
     return NextResponse.json({
       ok: true,
       rows: rows.map((r) => ({
+        id: r.id,
         timestamp: r.created_at,
         name: r.name,
         phone: r.phone,
@@ -54,5 +55,42 @@ export async function GET(req: NextRequest) {
   } catch (err) {
     console.error('Admin RSVP fetch error', err);
     return NextResponse.json({ ok: false, error: 'Failed to read from database' }, { status: 502 });
+  }
+}
+
+export async function DELETE(req: NextRequest) {
+  const password = req.headers.get('x-admin-password');
+  const expected = process.env.ADMIN_PASSWORD;
+
+  if (!expected) {
+    return NextResponse.json({ ok: false, error: 'ADMIN_PASSWORD not configured on server' }, { status: 500 });
+  }
+  if (password !== expected) {
+    return NextResponse.json({ ok: false, error: 'Wrong password' }, { status: 401 });
+  }
+
+  const url = process.env.DATABASE_URL || process.env.POSTGRES_URL;
+  if (!url) {
+    return NextResponse.json({ ok: false, error: 'Database not connected' }, { status: 500 });
+  }
+
+  let id: number | undefined;
+  try {
+    const body = await req.json();
+    id = Number(body?.id);
+  } catch {
+    /* no body */
+  }
+  if (!id || !Number.isInteger(id)) {
+    return NextResponse.json({ ok: false, error: 'Valid id required' }, { status: 400 });
+  }
+
+  try {
+    const sql = neon(url);
+    await sql`DELETE FROM rsvps WHERE id = ${id}`;
+    return NextResponse.json({ ok: true });
+  } catch (err) {
+    console.error('Admin RSVP delete error', err);
+    return NextResponse.json({ ok: false, error: 'Failed to delete from database' }, { status: 502 });
   }
 }
