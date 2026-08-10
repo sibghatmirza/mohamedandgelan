@@ -24,6 +24,7 @@ export default function AdminPage() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const [filter, setFilter] = useState<'all' | 'yes' | 'no'>('all');
+  const [eventFilter, setEventFilter] = useState<'all' | 'nikah' | 'cruise'>('all');
   const [deletingId, setDeletingId] = useState<number | null>(null);
 
   const remove = async (row: Row) => {
@@ -81,11 +82,25 @@ export default function AdminPage() {
     }
   }, [load]);
 
+  const eventOf = (r: Row) => ((r.event ?? 'nikah') === 'cruise' ? 'cruise' : 'nikah');
+  const guestsOf = (list: Row[]) => list.reduce((sum, r) => sum + (Number(r.guests) || 0), 0);
+
   const attendingRows = rows.filter((r) => String(r.attending).toLowerCase() === 'yes');
   const declinedRows = rows.filter((r) => String(r.attending).toLowerCase() === 'no');
-  const totalGuests = attendingRows.reduce((sum, r) => sum + (Number(r.guests) || 0), 0);
+  const nikahAttending = attendingRows.filter((r) => eventOf(r) === 'nikah');
+  const cruiseAttending = attendingRows.filter((r) => eventOf(r) === 'cruise');
 
-  const visible = filter === 'all' ? rows : filter === 'yes' ? attendingRows : declinedRows;
+  const totalGuests = guestsOf(attendingRows);
+  const nikahGuests = guestsOf(nikahAttending);
+  const cruiseGuests = guestsOf(cruiseAttending);
+
+  // apply event filter, then attendance filter
+  const byEvent = eventFilter === 'all' ? rows : rows.filter((r) => eventOf(r) === eventFilter);
+  const visible = filter === 'all'
+    ? byEvent
+    : byEvent.filter((r) => (filter === 'yes'
+        ? String(r.attending).toLowerCase() === 'yes'
+        : String(r.attending).toLowerCase() === 'no'));
 
   const exportCsv = () => {
     const header = ['Timestamp', 'Name', 'Phone', 'Guests', 'Guest Names', 'Attending', 'Event'];
@@ -151,10 +166,12 @@ export default function AdminPage() {
 
   // ── Dashboard ────────────────────────────────────────────────
   const stats = [
+    { label: 'Total Guests', value: totalGuests },
+    { label: 'Nikah Guests', value: nikahGuests },
+    { label: 'Nile Guests', value: cruiseGuests },
     { label: 'Responses', value: rows.length },
     { label: 'Accepted', value: attendingRows.length },
     { label: 'Declined', value: declinedRows.length },
-    { label: 'Total Guests', value: totalGuests },
   ];
 
   return (
@@ -191,7 +208,7 @@ export default function AdminPage() {
         </div>
 
         {/* Stats */}
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-10">
+        <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 mb-10">
           {stats.map((s) => (
             <div key={s.label} className="px-6 py-6 text-center"
               style={{ background: '#FFFFFF', border: '1px solid rgba(216,179,106,0.4)' }}>
@@ -205,8 +222,27 @@ export default function AdminPage() {
           ))}
         </div>
 
-        {/* Filter */}
-        <div className="flex gap-2 mb-4">
+        {/* Event filter */}
+        <div className="flex flex-wrap gap-2 mb-3">
+          {([['all', 'All Events'], ['nikah', 'Nikah'], ['cruise', 'Nile Cruise']] as const).map(([key, label]) => (
+            <button
+              key={key}
+              onClick={() => setEventFilter(key)}
+              className="px-4 py-1.5 text-[0.65rem] tracking-[0.2em] uppercase"
+              style={{
+                fontFamily: 'var(--font-body)',
+                background: eventFilter === key ? gold : 'transparent',
+                color: eventFilter === key ? burgundy : '#8a6d4a',
+                border: `1px solid ${eventFilter === key ? gold : 'rgba(216,179,106,0.5)'}`,
+              }}
+            >
+              {label}
+            </button>
+          ))}
+        </div>
+
+        {/* Attendance filter */}
+        <div className="flex flex-wrap gap-2 mb-4">
           {([['all', 'All'], ['yes', 'Accepted'], ['no', 'Declined']] as const).map(([key, label]) => (
             <button
               key={key}
