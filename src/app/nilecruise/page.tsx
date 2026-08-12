@@ -265,7 +265,7 @@ export default function NileCruisePage() {
         </Link>
       </footer>
 
-      <MusicPlayer src="/music/nile.mp3" />
+      <MusicPlayer src="/music/casablanca.mp3" startAt={0.7} endAt={25} />
     </main>
   );
 }

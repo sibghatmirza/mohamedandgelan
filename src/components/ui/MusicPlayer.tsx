@@ -9,9 +9,11 @@ const VOLUME = 0.16; // faint background level
 export default function MusicPlayer({
   src = '/music/background.mp3',
   startAt = 0,
+  endAt = 0,
 }: {
   src?: string;
   startAt?: number; // seconds to begin audible playback from (and loop back to)
+  endAt?: number;   // if > startAt, loop the [startAt, endAt] segment
 }) {
   const { t } = useLang();
   const [playing, setPlaying] = useState(false);
@@ -50,8 +52,15 @@ export default function MusicPlayer({
     const onMeta = () => { if (!audibleRef.current) seek(); };
     // loop back to the offset instead of 0
     const onEnded = () => { seek(); el.play().catch(() => {}); };
+    // loop the [startAt, endAt] segment
+    const onTime = () => {
+      if (endAt > startAt && el.currentTime >= endAt) {
+        try { el.currentTime = startAt; } catch { /* noop */ }
+      }
+    };
     el.addEventListener('loadedmetadata', onMeta);
     el.addEventListener('ended', onEnded);
+    if (endAt > startAt) el.addEventListener('timeupdate', onTime);
 
     // 1) primary: the intro video fires this when it finishes
     window.addEventListener('wedding:start-music', goAudible);
@@ -70,6 +79,7 @@ export default function MusicPlayer({
       gestures.forEach((e) => window.removeEventListener(e, onGesture, true));
       el.removeEventListener('loadedmetadata', onMeta);
       el.removeEventListener('ended', onEnded);
+      el.removeEventListener('timeupdate', onTime);
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
