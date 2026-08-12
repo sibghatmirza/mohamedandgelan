@@ -167,7 +167,7 @@ export default function AdminPage() {
   // ── Dashboard ────────────────────────────────────────────────
   const stats = [
     { label: 'Total Guests', value: totalGuests },
-    { label: 'Nikah Guests', value: nikahGuests },
+    { label: 'Katb Al Kitab Guests', value: nikahGuests },
     { label: 'Nile Guests', value: cruiseGuests },
     { label: 'Responses', value: rows.length },
     { label: 'Accepted', value: attendingRows.length },
@@ -224,7 +224,7 @@ export default function AdminPage() {
 
         {/* Event filter */}
         <div className="flex flex-wrap gap-2 mb-3">
-          {([['all', 'All Events'], ['nikah', 'Nikah'], ['cruise', 'Nile Cruise']] as const).map(([key, label]) => (
+          {([['all', 'All Events'], ['nikah', 'Katb Al Kitab'], ['cruise', 'Nile Cruise']] as const).map(([key, label]) => (
             <button
               key={key}
               onClick={() => setEventFilter(key)}
@@ -291,7 +291,7 @@ export default function AdminPage() {
                   <td className="px-4 py-3 text-center" style={{ color: '#6b5e56' }}>{r.guests}</td>
                   <td className="px-4 py-3" style={{ color: '#6b5e56' }}>{r.guestNames || '—'}</td>
                   <td className="px-4 py-3" style={{ color: '#6b5e56' }}>
-                    {(r.event ?? 'nikah') === 'cruise' ? 'Nile Cruise' : 'Nikah'}
+                    {(r.event ?? 'nikah') === 'cruise' ? 'Nile Cruise' : 'Katb Al Kitab'}
                   </td>
                   <td className="px-4 py-3">
                     <span className="px-3 py-1 text-[0.6rem] tracking-[0.15em] uppercase whitespace-nowrap"
